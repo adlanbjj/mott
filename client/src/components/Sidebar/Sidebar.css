@@ -1,0 +1,26 @@
+.sidebar-container {
+    border: 1px solid gray;
+    width: 20%;
+    min-height: 600px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.sidebar-up-block {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid gray;
+}
+
+.sidebar-midle-block {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-bottom-block {
+    display: flex;
+    flex-direction: column;
+}

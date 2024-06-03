@@ -1,6 +1,23 @@
 .App {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
 }
+
+
+.main-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.page-content {
+  flex: 1;
+  overflow-y: auto;
+  
+}
+
+
 
 .App-logo {
   height: 40vmin;
