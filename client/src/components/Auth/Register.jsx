@@ -1,21 +1,92 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Register = () => {
+  const [form, setForm] = useState({
+    username: "",
+    email: "",
+    password: "",
+    location: "",
+    age: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prevForm) => ({
+      ...prevForm,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    try {
+      const response = await fetch('http://localhost:3001/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(form)
+      });
+
+      if (!response.ok) {
+        throw new Error(`Server error: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      console.log('Registration successful:', data);
+
+    } catch (error) {
+      console.log('Problem with registration in client: ' + error.message);
+    }
+  };
+
   return (
     <div>
-       <form>
-        <input type="text" placeholder='Enter your username' name='username' />
-        <input type="email" placeholder='Enter your email' name='email' />
-        <input type="password" placeholder='Enter your password' name='password' />
-        <input type="text" placeholder='Yout location' name='location' />
-        <button>Login</button>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Enter your username"
+          name="username"
+          value={form.username}
+          onChange={handleChange}
+        />
+        <input
+          type="email"
+          placeholder="Enter your email"
+          name="email"
+          value={form.email}
+          onChange={handleChange}
+        />
+        <input
+          type="password"
+          placeholder="Enter your password"
+          name="password"
+          value={form.password}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          placeholder="Your location"
+          name="location"
+          value={form.location}
+          onChange={handleChange}
+        />
+        <input
+          type="number"
+          placeholder="Your age"
+          name="age"
+          value={form.age}
+          onChange={handleChange}
+        />
+        <button type="submit">Register</button>
       </form>
       <Link to="/login" className="header-link">
         Login
       </Link>
     </div>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;

@@ -1,31 +1,39 @@
-import React from 'react'
-import './Sidebar.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons';
-
+import React from "react";
+import "./Sidebar.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope, faUser } from "@fortawesome/free-solid-svg-icons";
+import { useUser } from "../../context/userContext";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
+  const { user, logout } = useUser();
+
   return (
-    <div className='sidebar-container'>
-      <div className="sidebar-up-block">
+    <div className="sidebar-container">
+    <div className="sidebar-up-block">
+      {user && (
+        <>
           <button>Add post</button>
-          <button>Edit profil</button>
-      </div>
-      <div className="sidebar-midle-block">
-          <a href="#">Homepage</a>
-          <a href="#">Words</a>
-          <a href="#">Keyboard</a>
-          <a href="#">Best users</a>
-          <a href="#">Messages</a>
-      </div>
-      <div className="sidebar-bottom-block">
-      <button>Logout</button>
-      <FontAwesomeIcon icon={faUser} />
-      <FontAwesomeIcon icon={faEnvelope} />
-
-      </div>
+          <button>Edit profile</button>
+        </>
+      )}
     </div>
-  )
-}
+    <div className="sidebar-midle-block">
+      <Link to="/" className="sidebar-link">Homepage</Link>
+      <Link to="/words" className="sidebar-link">Words</Link>
+      <Link to="/keyboard" className="sidebar-link">Keyboard</Link>
+      <Link to="/top-users" className="sidebar-link">Top-users</Link>
+      {user && <Link to="/messages" className="sidebar-link">Messages</Link>}
+    </div>
+    {user && (
+      <div className="sidebar-bottom-block">
+        <button onClick={logout}>Logout</button>
+        <FontAwesomeIcon icon={faUser} />
+        <FontAwesomeIcon icon={faEnvelope} />
+      </div>
+    )}
+  </div>
+  );
+};
 
-export default Sidebar
+export default Sidebar;

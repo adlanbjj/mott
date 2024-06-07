@@ -4,9 +4,11 @@ import Search from "../Search/Search";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell, faUser } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import AuthPage from "../../pages/AuthPage";
+import { useUser } from "../../context/userContext";
 
 const Header = () => {
+  const { user, logout } = useUser();
+
   return (
     <div className="header-container">
       <div className="logo-block">
@@ -16,11 +18,13 @@ const Header = () => {
         <Search />
       </div>
       <div className="header-user-block">
-      <Link to="/auth" className="header-link">
-          Sign In
-        </Link>
-        <FontAwesomeIcon icon={faUser} />
-        <FontAwesomeIcon icon={faBell} />
+        {!user ? (
+          <Link to="/auth" className="header-link">
+            Sign In
+          </Link>
+        ) : (
+          <FontAwesomeIcon icon={faUser} />
+        )}
       </div>
     </div>
   );
