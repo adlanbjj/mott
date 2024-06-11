@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 
 const Register = () => {
   const [form, setForm] = useState({
@@ -44,7 +43,7 @@ const Register = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+       <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Enter your username"
@@ -82,9 +81,6 @@ const Register = () => {
         />
         <button type="submit">Register</button>
       </form>
-      <Link to="/login" className="header-link">
-        Login
-      </Link>
     </div>
   );
 };

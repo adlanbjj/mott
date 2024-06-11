@@ -11,6 +11,7 @@ import WordsPage from "../pages/WordsPage";
 import KeyboardPage from "../pages/KeyboardPage";
 import TopUsersPage from "../pages/TopUsersPage";
 import MessagesPage from "../pages/MessagesPage";
+import NotFound from "../pages/NotFound";
 
 const AppRoutes = () => {
   return (
@@ -21,27 +22,21 @@ const AppRoutes = () => {
       <Route path="/top-users" element={<TopUsersPage />} />
       <Route
         path="/messages"
-        element={<ProtectedRoute element={<MessagesPage />} redirectTo="/auth" />}
+        element={
+          <ProtectedRoute element={<MessagesPage />} redirectTo="/auth" />
+        }
       />
       <Route
-        path="/register"
-        element={<RedirectRoute element={<Register />} redirectTo="/profile" />}
-      />
-       <Route
         path="/auth"
-        element={<RedirectRoute element={<Register />} redirectTo="/profile" />}
+        element={<RedirectRoute element={<AuthPage />} redirectTo="/profile" />}
       />
-      <Route
-        path="/login"
-        element={<RedirectRoute element={<Login />} redirectTo="/profile" />}
-      />
-      <Route path="/auth" element={<AuthPage />} />
       <Route
         path="/profile"
         element={
           <ProtectedRoute element={<ProfilePage />} redirectTo="/login" />
         }
       />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };

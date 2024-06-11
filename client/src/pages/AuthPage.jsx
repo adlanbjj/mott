@@ -1,11 +1,30 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import Login from "../components/Auth/Login";
+import Register from "../components/Auth/Register";
+import "../public/styles/AuthPage.css";
 
 const AuthPage = () => {
+  const [activeTab, setActiveTab] = useState("login");
+
   return (
-    <div>
-     <Login />
+    <div className="auth-container">
+      <div className="auth-block">
+        <div className="auth-tabs">
+          <div
+            className={`tab ${activeTab === "login" ? "active" : ""}`}
+            onClick={() => setActiveTab("login")}
+          >
+            Login
+          </div>
+          <div
+            className={`tab ${activeTab === "register" ? "active" : ""}`}
+            onClick={() => setActiveTab("register")}
+          >
+            Register
+          </div>
+        </div>
+        {activeTab === "login" ? <Login /> : <Register />}
+      </div>
     </div>
   );
 };

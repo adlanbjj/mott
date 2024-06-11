@@ -3,6 +3,7 @@ const cors = require("cors");
 require("dotenv").config();
 const { connectToDatabase } = require("./db");
 const authRoutes = require("./routes/authRoutes"); 
+const wordsRoutes = require("./routes/wordsRoutes"); 
 const cookieParser = require("cookie-parser");
 
 
@@ -20,6 +21,8 @@ app.use(cookieParser());
 
 
 app.use("/auth", authRoutes);
+app.use('/words', wordsRoutes);
+
 
 
 async function main() {

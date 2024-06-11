@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell, faUser } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { useUser } from "../../context/userContext";
+import Myimage from '../../public/images/logo-mott.jpg'
 
 const Header = () => {
   const { user, logout } = useUser();
@@ -12,7 +13,7 @@ const Header = () => {
   return (
     <div className="header-container">
       <div className="logo-block">
-        <h1>mott</h1>
+        <img src={Myimage} alt="img" />
       </div>
       <div className="search-block">
         <Search />
