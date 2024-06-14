@@ -4,6 +4,7 @@ require("dotenv").config();
 const { connectToDatabase } = require("./db");
 const authRoutes = require("./routes/authRoutes"); 
 const wordsRoutes = require("./routes/wordsRoutes"); 
+const commentsRoutes = require("./routes/commentsRoutes"); 
 const cookieParser = require("cookie-parser");
 
 
@@ -22,7 +23,7 @@ app.use(cookieParser());
 
 app.use("/auth", authRoutes);
 app.use('/words', wordsRoutes);
-
+app.use('/comments', commentsRoutes);
 
 
 async function main() {

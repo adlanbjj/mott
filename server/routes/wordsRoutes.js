@@ -11,4 +11,16 @@ router.get('/all', async (req, res) => {
   }
 });
 
+router.get('/:wordId', async (req, res) => {
+  try {
+    const word = await Words.findById(req.params.wordId);
+    if (!word) {
+      return res.status(404).send({ message: 'Слово не найдено' });
+    }
+    res.status(200).send(word);
+  } catch (error) {
+    res.status(500).send({ message: 'Ошибка при получении слова', error });
+  }
+});
+
 module.exports = router;

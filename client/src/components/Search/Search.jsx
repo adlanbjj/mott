@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from 'react-router-dom';
 import "./Search.css";
 
 const Search = () => {
@@ -60,9 +61,11 @@ const Search = () => {
         <div className="search-results">
           {result.slice(0, 6).map((word, index) => (
             <div key={index} className="word-item">
-              <p><strong>Latin:</strong> {word.latin}</p>
-              <p><strong>Cyrillic:</strong> {word.cyrillic}</p>
-              <p><strong>Translation:</strong> {word.translation}</p>
+              <Link to={`/word/${word._id}`}>
+                <p><strong>Latin:</strong> {word.latin}</p>
+                <p><strong>Cyrillic:</strong> {word.cyrillic}</p>
+                <p><strong>Translation:</strong> {word.translation}</p>
+              </Link>
             </div>
           ))}
         </div>

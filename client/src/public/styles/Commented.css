@@ -1,0 +1,67 @@
+/* CommentedWords.css */
+
+.commented-words-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+  }
+  
+  .title {
+    font-size: 2.5em;
+    color: #333333;
+    margin-bottom: 20px;
+  }
+  
+  .words-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    max-height: 300px;
+    overflow-y: auto;
+    border-top: 1px solid #ddd;
+  }
+  
+  .word-item {
+    margin: 10px 0;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .word-link {
+    display: inline-block;
+    width: 100%;
+    text-decoration: none;
+    color: #333;
+    padding: 15px 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .word-link:hover {
+    background: #eaeaea;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  .word-latin {
+    font-weight: bold;
+    color: #007bff;
+  }
+  
+  .word-cyrillic, .word-translation {
+    color: #555555;
+  }
+  
+  .login-message, .loading-message, .error-message {
+    font-size: 1.2em;
+    color: #333333;
+    text-align: center;
+    margin-top: 20px;
+  }
+  

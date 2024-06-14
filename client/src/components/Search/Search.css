@@ -1,34 +1,68 @@
+/* Search.css */
 .search-container {
-    position: relative;
-    width: 400px;
-    margin: 0 auto;
-  }
-  
-  .search-container input {
+  position: relative;
+  width: 400px;
+  margin: 0 auto;
+  padding: 5px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.search-container input[type="text"] {
+  width: 250px;
+  padding: 5px;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  font-size: 16px;
+  transition: box-shadow 0.2s;
+}
+
+
+
+.search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-height: 350px;
+  overflow-y: auto;
+  margin-top: 5px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  z-index: 1000;
+}
+
+.word-item {
+  padding: 10px;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background-color 0.2s;
+}
+
+.word-item:last-child {
+  border-bottom: none;
+}
+
+.word-item:hover {
+  background-color: #f9f9f9;
+}
+
+.word-item p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.word-item strong {
+  color: #333;
+}
+
+@media (max-width: 600px) {
+  .search-container {
     width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
   }
-  
-  .search-results {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    max-height: 500px;
-    overflow-y: auto;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    z-index: 1000;
-    box-sizing: border-box;
-  }
-  
-  .word-item {
-    padding: 5px;
-    border-bottom: 1px solid #ccc;
-  }
-  
-  .word-item:last-child {
-    border-bottom: none;
-  }
-  
+}

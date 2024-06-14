@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell, faUser } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { useUser } from "../../context/userContext";
-import Myimage from '../../public/images/logo-mott.jpg'
+import Myimage from '../../public/images/mott-logo.png'
 
 const Header = () => {
   const { user, logout } = useUser();
