@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useUser } from '../../context/userContext';
 
 
@@ -67,6 +67,9 @@ const Login = () => {
       <button type="submit">Login</button>
     </form>
     {error && <p style={{ color: 'red' }}>{error}</p>}
+    <div className="forgot-password-link">
+        <Link to="/forgot-password">Forgot Password?</Link>
+      </div>
   </div>
   );
 };

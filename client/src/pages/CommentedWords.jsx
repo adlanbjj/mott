@@ -36,16 +36,17 @@ const CommentedWords = () => {
     }
   }, [user]);
 
+ 
   if (!user) {
-    return <div>Please log in to view your commented words.</div>;
+    return <div className="login-message">Please log in to view your commented words.</div>;
   }
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="loading-message">Loading...</div>;
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <div className="error-message">Error: {error}</div>;
   }
 
   return (

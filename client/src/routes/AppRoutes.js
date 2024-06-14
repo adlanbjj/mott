@@ -11,6 +11,8 @@ import MessagesPage from "../pages/MessagesPage";
 import NotFound from "../pages/NotFound";
 import WordDetails from "../pages/WordDetails";
 import CommentedWords from "../pages/CommentedWords";
+import ResetPassword from "../components/ResetPassword/ResetPassword";
+import ForgotPassword from "../components/ForgotPassword/ForgotPassword";
 
 const AppRoutes = () => {
   return (
@@ -20,6 +22,8 @@ const AppRoutes = () => {
       <Route path="/keyboard" element={<KeyboardPage />} />
       <Route path="/top-users" element={<TopUsersPage />} />
       <Route path="/word/:wordId" element={<WordDetails />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/reset/:token" element={<ResetPassword />} />
       <Route
         path="/messages"
         element={
