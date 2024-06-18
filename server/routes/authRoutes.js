@@ -6,6 +6,8 @@ const User = require("../models/User");
 require("dotenv").config();
 const transporter = require("../config/nodemailer");
 const router = express.Router();
+const adminAuth = require("../middleware/adminAuth");
+const Posts = require('../models/Posts');
 
 
 
@@ -52,7 +54,7 @@ router.post("/login", async (req, res) => {
       return res.status(400).send({ error: "Invalid username or password" });
     }
 
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ userId: user._id, isAdmin: user.isAdmin }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
 
@@ -65,6 +67,7 @@ router.post("/login", async (req, res) => {
     res.status(400).send({ error: error.message });
   }
 });
+
 
 router.get("/user", async (req, res) => {
   try {
@@ -156,6 +159,75 @@ router.post("/reset/:token", async (req, res) => {
     res.status(500).send({ error: error.message });
   }
 });
+
+
+router.get('/admin/users', adminAuth, async (req, res) => {
+  try {
+    const users = await User.find().select('-password');
+    res.send(users);
+  } catch (error) {
+    res.status(500).send({ error: 'Error fetching users' });
+  }
+});
+
+
+router.delete('/admin/users/:id', adminAuth, async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).send({ error: 'User not found' });
+    }
+
+    await user.deleteOne();
+    res.send({ message: 'User and their posts deleted' });
+  } catch (error) {
+    console.error('Error deleting user and their posts:', error);
+    res.status(500).send({ error: 'Error deleting user and their posts' });
+  }
+});
+
+router.patch('/admin/users/block/:id', adminAuth, async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).send({ error: 'User not found' });
+    }
+
+    user.isBlocked = !user.isBlocked;
+    await user.save();
+    res.send(user);
+  } catch (error) {
+    console.error('Error blocking/unblocking user:', error);
+    res.status(500).send({ error: 'Error blocking/unblocking user' });
+  }
+});
+
+router.get("/user-list", async (req, res) => {
+  try {
+    const users = await User.find().select("username age location _id"); 
+    res.json(users);
+  } catch (err) {
+    res.status(500).send({ error: 'Error fetching users' });
+  }
+});
+
+router.get("/user/:id", async (req, res) => {
+  if (!req.params.id || req.params.id === 'undefined') {
+    return res.status(400).send({ error: "No user ID provided" });
+  }
+  try {
+    const user = await User.findById(req.params.id).select('username age location -_id');
+    if (!user) {
+      return res.status(404).send({ error: "User not found" });
+    }
+    res.json(user);
+  } catch (err) {
+    console.error('Error fetching user:', err);
+    res.status(500).send({ error: 'Internal server error' });
+  }
+});
+
+ 
 
 
 module.exports = router;

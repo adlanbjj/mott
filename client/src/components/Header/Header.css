@@ -8,3 +8,29 @@
 .logo-block img {
     height: 100px;
 }
+
+.header-link {
+    margin-right: 25px;
+}
+
+.logout-btn {
+    cursor: pointer;
+    text-decoration: underline;
+    color: rgb(25, 96, 137);
+    margin: 5px;
+}
+
+.logout-btn:hover {
+    color: rgb(100, 169, 209);
+
+}
+
+.logout-block {
+    display: flex;
+    align-items: center;
+    margin: 5px;
+}
+
+.off-icon {
+    color: rgb(63, 143, 189);
+}

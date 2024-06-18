@@ -2,10 +2,10 @@ import React from "react";
 import "./Header.css";
 import Search from "../Search/Search";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBell, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faBell, faPowerOff, faUser } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { useUser } from "../../context/userContext";
-import Myimage from '../../public/images/mott-logo.png'
+import Myimage from "../../public/images/mott-logo.png";
 
 const Header = () => {
   const { user, logout } = useUser();
@@ -24,7 +24,13 @@ const Header = () => {
             Sign In
           </Link>
         ) : (
-          <FontAwesomeIcon icon={faUser} />
+          <div className="logout-block">
+            <p className="logout-btn" onClick={logout}>
+              Logout
+            </p>
+            <FontAwesomeIcon className="off-icon" icon={faPowerOff} />
+
+          </div>
         )}
       </div>
     </div>

@@ -1,0 +1,53 @@
+.userlist-cont {
+    margin: 20px;
+    font-family: 'Arial', sans-serif;
+}
+
+.userlist-title {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.user-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px 20px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f9f9f9;
+}
+
+.user-info {
+    cursor: pointer;
+}
+
+.user-info:hover {
+    text-decoration: underline;
+}
+
+.userlist-cont .button {
+    padding: 8px 16px;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.userlist-cont .button:hover {
+    background-color: #004094;
+}
+
+.userlist-cont .error {
+    color: red;
+    text-align: center;
+}
+
+.noUsers {
+    text-align: center;
+    color: #555;
+}

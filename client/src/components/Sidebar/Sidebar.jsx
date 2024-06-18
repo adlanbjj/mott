@@ -3,8 +3,13 @@ import "../Sidebar/Sidebar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useUser } from "../../context/userContext";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import defaultAvatar from "../../public/images/default-avatar.png";
+import {
+  faInstagram,
+  faLinkedin,
+  faGithub,
+} from "@fortawesome/free-brands-svg-icons";
 
 const Sidebar = () => {
   const { user, logout } = useUser();
@@ -12,13 +17,19 @@ const Sidebar = () => {
 
   return (
     <div className="sidebar-container">
-      <div className={`sidebar-up-block ${user ? 'authenticated-background' : ''}`}>
+      <div
+        className={`sidebar-up-block ${user ? "authenticated-background" : ""}`}
+      >
         {user && (
           <>
             <img src={user.avatar || userAva} alt="User Avatar" />
             {user.username}
-            <button>Add post</button>
-            <button>Edit profile</button>
+            <Link to="/posts/create">
+              <button>Create Post</button>
+            </Link>
+            <Link to="/posts/create">
+              <button>Edit profile</button>
+            </Link>
           </>
         )}
       </div>
@@ -48,7 +59,7 @@ const Sidebar = () => {
           Keyboard
         </NavLink>
         <NavLink
-          to="/top-users"
+          to="/user-list"
           className={({ isActive }) =>
             "sidebar-link" + (isActive ? " active" : "")
           }
@@ -66,11 +77,12 @@ const Sidebar = () => {
           </NavLink>
         )}
       </div>
-      {user && (
-        <div className="sidebar-bottom-block">
-          <button onClick={logout}>Logout</button>
-        </div>
-      )}
+
+      <div className="sidebar-bottom-block">
+        <FontAwesomeIcon className="bottom-block-icon" icon={faInstagram} />
+        <FontAwesomeIcon className="bottom-block-icon" icon={faGithub} />
+        <FontAwesomeIcon className="bottom-block-icon" icon={faLinkedin} />
+      </div>
     </div>
   );
 };

@@ -1,0 +1,130 @@
+.post-create-container {
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  padding: 1rem;
+  border-radius: 10px;
+  max-width: 500px;
+  box-shadow: 1px 5px 5px 1px rgb(234, 234, 234);
+  position: relative;
+  margin: 0 auto;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.avatar {
+  border-radius: 50%;
+}
+
+.user-info {
+  margin-left: 10px;
+  flex-grow: 1;
+}
+
+.username {
+  font-weight: bold;
+  display: block;
+}
+
+.user-handle {
+  color: #8899a6;
+  font-size: 0.9rem;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.post-input {
+  width: 100%;
+  background: none;
+  border: none;
+  color: rgb(0, 0, 0);
+  margin-top: 10px;
+  font-size: 1rem;
+  padding: 0.5rem;
+  border-bottom: 1px solid #ccc;
+  outline: none;
+}
+
+.post-input::placeholder {
+  color: #8899a6;
+}
+
+.post-textarea {
+  width: 100%;
+  background: none;
+  border: none;
+  color: rgb(0, 0, 0);
+  margin-top: 10px;
+  font-size: 1rem;
+  resize: none;
+  height: 80px;
+  outline: none;
+}
+
+.post-textarea::placeholder {
+  color: #8899a6;
+}
+
+.post-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.post-options {
+  display: flex;
+  align-items: center;
+}
+
+.option-button {
+  background: none;
+  border: none;
+  color: #1da1f2;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-right: 10px;
+}
+
+.icon-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.icon-buttons button {
+  background: none;
+  border: none;
+  color: #1da1f2;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.post-button {
+  background-color: #1da1f2;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.post-button:hover {
+  background-color: #1a91da;
+}
+
+.error {
+  color: red;
+  font-family: 'Open Sans', sans-serif;
+  margin-top: 1rem;
+}

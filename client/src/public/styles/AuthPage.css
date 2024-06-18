@@ -70,3 +70,8 @@
     border-bottom: 2px solid #3498db;
     color: #3498db;
   }
+
+  .forgot-password-link {
+    margin-top: 10px;
+    text-align: center;
+  }

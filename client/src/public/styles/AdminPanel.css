@@ -1,0 +1,56 @@
+.admin-panel-container {
+    padding: 2rem;
+    background: #f7f9fc;
+  }
+  
+  .admin-panel-container h2 {
+    margin-bottom: 1rem;
+  }
+  
+  .admin-panel-container input {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    width: 100%;
+    max-width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .users-list {
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+  
+  .user-item {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  .user-item button {
+    margin-right: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+  .user-item button:hover {
+    background: #0056b3;
+  }
+  
+  .user-item p {
+    margin: 0.5rem 0;
+  }
+  
+  .error {
+    color: red;
+  }
+  

@@ -11,11 +11,13 @@ function App() {
     <BrowserRouter>
       <UserProvider>
         <div className="App">
-          <Header />
+          <div className="header-content">
+            <Header />
+          </div>
           <div className="main-content">
             <Sidebar />
             <div className="page-content">
-            <AppRoutes /> 
+              <AppRoutes />
             </div>
           </div>
         </div>

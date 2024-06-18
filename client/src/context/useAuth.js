@@ -16,7 +16,7 @@ const useAuth = () => {
         credentials: 'include',
       });
       setUser(null);
-      navigate("/");
+      navigate("/auth");
     } catch (error) {
       console.error("Logout failed:", error);
     }

@@ -37,7 +37,7 @@ const Login = () => {
       const data = await response.json();
       if (response.ok) {
         login(data.userdata);
-        navigate("/profile");
+        navigate("/");
       } else {
         setError(data.error || "Login failed");
       }
