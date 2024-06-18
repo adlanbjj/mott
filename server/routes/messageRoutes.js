@@ -2,6 +2,9 @@ const express = require("express");
 const Message = require("../models/Message");
 const User = require("../models/User");
 const router = express.Router();
+const auth = require('../middleware/auth'); // Используем ваше middleware
+
+router.use(auth);
 
 router.post("/send", async (req, res) => {
   try {
@@ -22,6 +25,54 @@ router.get("/conversation/:userId", async (req, res) => {
       $or: [{ sender: req.user._id, recipient: userId }, { sender: userId, recipient: req.user._id }]
     }).sort({ createdAt: 1 });
     res.send(messages);
+  } catch (error) {
+    res.status(400).send({ error: error.message });
+  }
+});
+
+router.get("/conversations", async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const messages = await Message.aggregate([
+      { $match: { $or: [{ sender: userId }, { recipient: userId }] } },
+      { $sort: { createdAt: -1 } },
+      {
+        $group: {
+          _id: {
+            $cond: {
+              if: { $eq: ["$sender", userId] },
+              then: "$recipient",
+              else: "$sender"
+            }
+          },
+          latestMessage: { $first: "$$ROOT" }
+        }
+      },
+      {
+        $lookup: {
+          from: "users",
+          localField: "_id",
+          foreignField: "_id",
+          as: "userDetails"
+        }
+      },
+      {
+        $project: {
+          _id: 1,
+          "userDetails.username": 1,
+          "userDetails.avatar": 1,
+          "latestMessage.content": 1,
+          "latestMessage.createdAt": 1
+        }
+      }
+    ]);
+    res.send(messages.map(m => ({
+      _id: m._id,
+      username: m.userDetails[0].username,
+      avatar: m.userDetails[0].avatar,
+      latestMessage: m.latestMessage.content,
+      createdAt: m.latestMessage.createdAt
+    })));
   } catch (error) {
     res.status(400).send({ error: error.message });
   }

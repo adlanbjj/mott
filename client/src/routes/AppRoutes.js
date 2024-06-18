@@ -9,7 +9,6 @@ import KeyboardPage from "../pages/KeyboardPage";
 import MessagesPage from "../pages/MessagesPage";
 import NotFound from "../pages/NotFound";
 import WordDetails from "../pages/WordDetails";
-import CommentedWords from "../pages/CommentedWords";
 import ResetPassword from "../components/ResetPassword/ResetPassword";
 import ForgotPassword from "../components/ForgotPassword/ForgotPassword";
 import CreatePost from "../pages/CreatePost";
@@ -18,6 +17,7 @@ import PostPage from "../pages/PostPage";
 import AdminPanel from "../pages/AdminPanel";
 import EditUser from "../pages/EditUser";
 import UserList from "../pages/UserList";
+import Dashboard from "../pages/Dashboard";
 
 const AppRoutes = () => {
   const [posts, setPosts] = useState([]);
@@ -30,7 +30,6 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Homepage />} />
-      <Route path="/words" element={<CommentedWords />} />
       <Route path="/keyboard" element={<KeyboardPage />} />
       <Route path="/user-list" element={<UserList />} />
       <Route path="/word/:wordId" element={<WordDetails />} />
@@ -44,6 +43,7 @@ const AppRoutes = () => {
       <Route path="/messages" element={<ProtectedRoute element={<MessagesPage />} redirectTo="/auth" />} />
       <Route path="/users" element={<ProtectedRoute element={<UserList />} redirectTo="/auth" />} />
       <Route path="/user-profile/:userId" element={<ProfilePage />} />
+      <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} redirectTo="/auth" />} />
 
       <Route
         path="/messages"

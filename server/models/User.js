@@ -4,11 +4,15 @@ const Posts = require("./Posts");
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
+  password: { 
+    type: String, 
+    required: function() { 
+      return this.isNew || this.isModified('password'); 
+    }
+  },
   location: String,
   age: Number,
-  isAdmin: { type: Boolean, default: false },
-  isBlocked: { type: Boolean, default: false },
+  avatar: String,
   resetPasswordToken: String,
   resetPasswordExpires: Date,
 });

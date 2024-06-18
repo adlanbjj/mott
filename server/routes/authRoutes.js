@@ -8,10 +8,20 @@ const transporter = require("../config/nodemailer");
 const router = express.Router();
 const adminAuth = require("../middleware/adminAuth");
 const Posts = require('../models/Posts');
+const auth = require("../middleware/auth");
+const multer = require("multer");
+const path = require("path");
 
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${req.user._id}-${Date.now()}${path.extname(file.originalname)}`);
+  }
+});
 
-
-
+const upload = multer({ storage });
 
 router.post("/register", async (req, res) => {
   try {
@@ -227,7 +237,55 @@ router.get("/user/:id", async (req, res) => {
   }
 });
 
- 
+router.get("/current", auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id).select("-password");
+    res.send(user);
+  } catch (error) {
+    res.status(500).send({ error: "Error fetching user data" });
+  }
+});
+
+router.patch("/current", auth, upload.single('avatar'), async (req, res) => {
+  const updates = Object.keys(req.body);
+  const allowedUpdates = ["email", "password", "location", "age", "avatar"];
+  const isValidOperation = updates.every((update) =>
+    allowedUpdates.includes(update)
+  );
+
+  if (!isValidOperation) {
+    return res.status(400).send({ error: "Invalid updates!" });
+  }
+
+  try {
+    const user = await User.findById(req.user._id);
+
+    updates.forEach((update) => {
+      if (update === "password" && req.body.password) {
+        user.password = req.body.password;
+      } else {
+        user[update] = req.body[update];
+      }
+    });
+
+    if (req.body.password) {
+      user.password = await bcrypt.hash(req.body.password, 10);
+    }
+
+    if (req.file) {
+      user.avatar = `/uploads/${req.file.filename}`;
+    }
+
+    await user.save();
+    const { password, ...updatedUser } = user.toObject();
+    res.send(updatedUser);
+  } catch (error) {
+    res.status(400).send({ error: "Error updating user data" });
+  }
+});
+
+
+
 
 
 module.exports = router;

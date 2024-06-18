@@ -22,12 +22,12 @@ const Sidebar = () => {
       >
         {user && (
           <>
-            <img src={user.avatar || userAva} alt="User Avatar" />
-            {user.username}
+            <img src={user.avatar ? `http://localhost:3001${user.avatar}` : userAva} alt="User Avatar" className="user-avatar" />
+            <div className="username">{user.username}</div>
             <Link to="/posts/create">
               <button>Create Post</button>
             </Link>
-            <Link to="/posts/create">
+            <Link to="/dashboard">
               <button>Edit profile</button>
             </Link>
           </>
@@ -41,14 +41,6 @@ const Sidebar = () => {
           }
         >
           Homepage
-        </NavLink>
-        <NavLink
-          to="/words"
-          className={({ isActive }) =>
-            "sidebar-link" + (isActive ? " active" : "")
-          }
-        >
-          Words
         </NavLink>
         <NavLink
           to="/keyboard"
