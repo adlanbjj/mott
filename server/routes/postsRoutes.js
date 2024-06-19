@@ -104,4 +104,54 @@ router.post('/:id/comments', auth, async (req, res) => {
   }
 });
 
+router.post('/:id/like', auth, async (req, res) => {
+  try {
+    const post = await Posts.findById(req.params.id);
+    if (!post) {
+      return res.status(404).send({ error: 'Post not found' });
+    }
+
+    if (!post.likes.some(like => like.toString() === req.user._id.toString())) {
+      post.likes.push(req.user._id);
+      post.dislikes.pull(req.user._id);
+    } else {
+      post.likes.pull(req.user._id);
+    }
+
+    await post.save();
+
+    const posts = await Posts.find({ author: post.author });
+    const likeCount = posts.reduce((acc, post) => acc + (post.likes ? post.likes.length : 0), 0);
+
+    res.status(200).send({ post, likeCount });
+  } catch (error) {
+    res.status(500).send({ error: 'Server error' });
+  }
+});
+
+router.post('/:id/dislike', auth, async (req, res) => {
+  try {
+    const post = await Posts.findById(req.params.id);
+    if (!post) {
+      return res.status(404).send({ error: 'Post not found' });
+    }
+
+    if (!post.dislikes.includes(req.user._id)) {
+      post.dislikes.push(req.user._id);
+      post.likes.pull(req.user._id);
+    } else {
+      post.dislikes.pull(req.user._id);
+    }
+
+    await post.save();
+
+    const posts = await Posts.find({ author: post.author });
+    const likeCount = posts.reduce((acc, post) => acc + (post.likes ? post.likes.length : 0), 0);
+
+    res.status(200).send({ post, likeCount });
+  } catch (error) {
+    res.status(500).send({ error: 'Server error' });
+  }
+});
+
 module.exports = router;

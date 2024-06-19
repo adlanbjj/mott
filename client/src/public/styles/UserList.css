@@ -1,53 +1,35 @@
-.userlist-cont {
-    margin: 20px;
-    font-family: 'Arial', sans-serif;
-}
-
-.userlist-title {
-    color: #333;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
 .user-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px 20px;
-    margin: 10px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #f9f9f9;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin: 10px;
+  cursor: pointer;
 }
 
-.user-info {
-    cursor: pointer;
+
+.top-user:nth-child(1) {
+  border: 2px solid #ff4500; /* Оранжевый цвет для первого пользователя */
 }
 
-.user-info:hover {
-    text-decoration: underline;
+.top-user:nth-child(2) {
+  border: 2px solid #c0c0c0; /* Серебряный цвет для второго пользователя */
 }
 
-.userlist-cont .button {
-    padding: 8px 16px;
-    background-color: #0056b3;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+.top-user:nth-child(3) {
+  border: 2px solid #cd7f32; /* Бронзовый цвет для третьего пользователя */
 }
 
-.userlist-cont .button:hover {
-    background-color: #004094;
+.star {
+  color: gray;
+  font-size: 1.5em;
+  margin-right: 2px;
 }
 
-.userlist-cont .error {
-    color: red;
-    text-align: center;
+.star.filled {
+  color: gold;
 }
 
-.noUsers {
-    text-align: center;
-    color: #555;
+.user-stars {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px; /* Добавляем отступ снизу, чтобы звезды были выше счетчика постов */
 }

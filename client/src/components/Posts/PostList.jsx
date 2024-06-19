@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useUser } from '../../context/userContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 import './PostList.css';
 
 const PostList = () => {
@@ -79,6 +81,42 @@ const PostList = () => {
     }
   };
 
+  const handleLike = async (postId) => {
+    try {
+      const response = await fetch(`http://localhost:3001/posts/${postId}/like`, {
+        method: 'POST',
+        credentials: 'include',
+      });
+      if (response.ok) {
+        const { post: updatedPost, likeCount } = await response.json();
+        setPosts(posts.map(post => (post._id === postId ? updatedPost : post)));
+      } else {
+        const data = await response.json();
+        setError(data.error);
+      }
+    } catch (error) {
+      setError('An error occurred. Please try again later.');
+    }
+  };
+
+  const handleDislike = async (postId) => {
+    try {
+      const response = await fetch(`http://localhost:3001/posts/${postId}/dislike`, {
+        method: 'POST',
+        credentials: 'include',
+      });
+      if (response.ok) {
+        const { post: updatedPost, likeCount } = await response.json();
+        setPosts(posts.map(post => (post._id === postId ? updatedPost : post)));
+      } else {
+        const data = await response.json();
+        setError(data.error);
+      }
+    } catch (error) {
+      setError('An error occurred. Please try again later.');
+    }
+  };
+
   const truncateText = (text, wordLimit) => {
     if (!text) return '';
     const words = text.split(' ');
@@ -138,6 +176,14 @@ const PostList = () => {
                   <Link to={`/posts/${post._id}`} className="comment-button">
                     Add Comment
                   </Link>
+                </div>
+                <div className="post-actions">
+                  <button onClick={() => handleLike(post._id)} className="like-button">
+                    <FontAwesomeIcon icon={faThumbsUp} /> {post.likes ? post.likes.length : 0}
+                  </button>
+                  <button onClick={() => handleDislike(post._id)} className="dislike-button">
+                    <FontAwesomeIcon icon={faThumbsDown} /> {post.dislikes ? post.dislikes.length : 0}
+                  </button>
                 </div>
               </>
             )}

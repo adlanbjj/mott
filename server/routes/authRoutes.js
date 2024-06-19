@@ -226,16 +226,22 @@ router.get("/user/:id", async (req, res) => {
     return res.status(400).send({ error: "No user ID provided" });
   }
   try {
-    const user = await User.findById(req.params.id).select('username age location -_id');
+    const user = await User.findById(req.params.id).select('username avatar age location experience');
     if (!user) {
       return res.status(404).send({ error: "User not found" });
     }
-    res.json(user);
+    
+    const posts = await Posts.find({ author: user._id });
+    const likeCount = posts.reduce((acc, post) => acc + (post.likes ? post.likes.length : 0), 0);
+    
+    res.json({ ...user.toObject(), likeCount, postCount: posts.length });
   } catch (err) {
     console.error('Error fetching user:', err);
     res.status(500).send({ error: 'Internal server error' });
   }
 });
+
+
 
 router.get("/current", auth, async (req, res) => {
   try {
@@ -281,6 +287,49 @@ router.patch("/current", auth, upload.single('avatar'), async (req, res) => {
     res.send(updatedUser);
   } catch (error) {
     res.status(400).send({ error: "Error updating user data" });
+  }
+});
+
+
+router.get('/user-ranking', async (req, res) => {
+  try {
+    const users = await User.aggregate([
+      {
+        $lookup: {
+          from: 'posts',
+          localField: '_id',
+          foreignField: 'author',
+          as: 'posts'
+        }
+      },
+      { $unwind: { path: '$posts', preserveNullAndEmptyArrays: true } },
+      {
+        $addFields: {
+          postCount: { $cond: { if: { $isArray: "$posts" }, then: { $size: "$posts" }, else: 0 } },
+          likeCount: { $cond: { if: { $isArray: "$posts.likes" }, then: { $size: "$posts.likes" }, else: 0 } }
+        }
+      },
+      {
+        $group: {
+          _id: '$_id',
+          username: { $first: '$username' },
+          postCount: { $sum: 1 },
+          likeCount: { $sum: '$likeCount' }
+        }
+      },
+      { $sort: { likeCount: -1 } },
+      {
+        $project: {
+          username: 1,
+          postCount: 1,
+          likeCount: 1
+        }
+      }
+    ]);
+
+    res.status(200).send(users);
+  } catch (error) {
+    res.status(500).send({ error: 'Error fetching user ranking' });
   }
 });
 

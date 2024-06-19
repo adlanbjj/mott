@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../public/styles/UserList.css';
+import StarRating from '../components/Raiting/StarRating';
 
 function UserList() {
   const [users, setUsers] = useState([]);
@@ -10,7 +11,7 @@ function UserList() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch("http://localhost:3001/auth/user-list", {
+        const response = await fetch("http://localhost:3001/auth/user-ranking", {
           credentials: 'include',
         });
         if (response.ok) {
@@ -37,13 +38,14 @@ function UserList() {
 
   return (
     <div className="userlist-cont">
-      <h1 className="userlist-title">User List</h1>
+      <h1 className="userlist-title">User Ranking</h1>
       {users.length > 0 ? (
-        users.map(user => (
-          <div key={user._id} className="user-card" onClick={() => handleUserClick(user._id)}>
+        users.map((user, index) => (
+          <div key={user._id} className={`user-card ${index < 3 ? 'top-user' : ''}`} onClick={() => handleUserClick(user._id)}>
+            <StarRating likeCount={user.likeCount} /> {/* Используем компонент StarRating */}
             <p className="user-info">Username: {user.username}</p>
-            <p>Age: {user.age}</p>
-            <p>Location: {user.location}</p>
+            <p>Posts: {user.postCount}</p>
+            <p>Likes: {user.likeCount}</p>
           </div>
         ))
       ) : (
