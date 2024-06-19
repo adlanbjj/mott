@@ -1,13 +1,13 @@
-/* Search.css */
 .search-container {
   position: relative;
-  width: 400px;
+  width: 550px;
   margin: 0 auto;
   padding: 5px;
   border: 2px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: #fff;
+
 }
 
 .search-container input[type="text"] {
@@ -18,6 +18,7 @@
   outline: none;
   font-size: 16px;
   transition: box-shadow 0.2s;
+
 }
 
 
@@ -59,6 +60,7 @@
 
 .word-item strong {
   color: #333;
+
 }
 
 @media (max-width: 600px) {

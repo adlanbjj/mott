@@ -7,23 +7,25 @@ const AuthPage = () => {
   const [activeTab, setActiveTab] = useState("login");
 
   return (
-    <div className="auth-container">
-      <div className="auth-block">
-        <div className="auth-tabs">
-          <div
-            className={`tab ${activeTab === "login" ? "active" : ""}`}
-            onClick={() => setActiveTab("login")}
-          >
-            Login
+    <div className="auth-page">
+      <div className="auth-container">
+        <div className="auth-block">
+          <div className="auth-tabs">
+            <div
+              className={`tab ${activeTab === 'login' ? 'active' : ''}`}
+              onClick={() => setActiveTab('login')}
+            >
+              Çuvala
+            </div>
+            <div
+              className={`tab ${activeTab === 'register' ? 'active' : ''}`}
+              onClick={() => setActiveTab('register')}
+            >
+              Register
+            </div>
           </div>
-          <div
-            className={`tab ${activeTab === "register" ? "active" : ""}`}
-            onClick={() => setActiveTab("register")}
-          >
-            Register
-          </div>
+          {activeTab === 'login' ? <Login /> : <Register />}
         </div>
-        {activeTab === "login" ? <Login /> : <Register />}
       </div>
     </div>
   );

@@ -42,7 +42,7 @@ function UserList() {
       {users.length > 0 ? (
         users.map((user, index) => (
           <div key={user._id} className={`user-card ${index < 3 ? 'top-user' : ''}`} onClick={() => handleUserClick(user._id)}>
-            <StarRating likeCount={user.likeCount} /> {/* Используем компонент StarRating */}
+            <StarRating likeCount={user.likeCount} />
             <p className="user-info">Username: {user.username}</p>
             <p>Posts: {user.postCount}</p>
             <p>Likes: {user.likeCount}</p>

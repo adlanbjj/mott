@@ -53,7 +53,7 @@ const Search = () => {
     <div className="search-container" ref={searchContainerRef}>
       <input
         type="text"
-        placeholder="Search..."
+        placeholder="Laxa..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />

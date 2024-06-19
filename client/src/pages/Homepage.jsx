@@ -11,8 +11,7 @@ const Homepage = () => {
     <div className='homepage-container'>
       {!user && (
         <div className='auth-message'>
-          <p>You need to log in to write a post or leave a comment.</p>
-          <Link to='/auth' className='auth-link'>Sign in</Link>
+          <p>Post yazya ya postan buxaẋ komentari yita <Link to='/auth' className='auth-link'>Çuvala</Link></p>
         </div>
       )}
       <PostList />

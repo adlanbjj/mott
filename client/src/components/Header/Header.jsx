@@ -21,14 +21,13 @@ const Header = () => {
       <div className="header-user-block">
         {!user ? (
           <Link to="/auth" className="header-link">
-            Sign In
+            Çuvala
           </Link>
         ) : (
           <div className="logout-block">
             <p className="logout-btn" onClick={logout}>
-              Logout
+              Arvala
             </p>
-            <FontAwesomeIcon className="off-icon" icon={faPowerOff} />
 
           </div>
         )}

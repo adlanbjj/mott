@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useUser } from '../context/userContext';
 import '../public/styles/PostPage.css';
 
@@ -63,7 +63,7 @@ const PostPage = () => {
           <p>{post.content}</p>
           {post.author ? (
             <>
-              <p><strong>Author:</strong> {post.author.username}</p>
+              <p><strong>Author:</strong> <Link to={`/user-profile/${post.author._id}`}>{post.author.username}</Link></p>
               <p><strong>Created At:</strong> {new Date(post.createdAt).toLocaleString()}</p>
             </>
           ) : (
@@ -76,7 +76,7 @@ const PostPage = () => {
                 <p>{comment.content}</p>
                 {comment.author ? (
                   <>
-                    <p><strong>Author:</strong> {comment.author.username}</p>
+                    <p><strong>Author:</strong> <Link to={`/user-profile/${comment.author._id}`}>{comment.author.username}</Link></p>
                   </>
                 ) : (
                   <p><strong>Author:</strong> Unknown</p>

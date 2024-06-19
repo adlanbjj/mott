@@ -11,18 +11,30 @@
 
 .header-link {
     margin-right: 25px;
+    color: rgb(37, 102, 215);
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px;
+}
+
+.header-link:hover {
+    background-color: rgb(242, 242, 242);
 }
 
 .logout-btn {
     cursor: pointer;
-    text-decoration: underline;
-    color: rgb(25, 96, 137);
-    margin: 5px;
+    text-decoration: none;
+    color: rgb(37, 102, 215);
+    font-size: 18px;
+    padding: 10px;
+    margin-right: 25px;
+
 }
 
-.logout-btn:hover {
-    color: rgb(100, 169, 209);
 
+
+.logout-btn:hover {
+    background-color: rgb(242, 242, 242);
 }
 
 .logout-block {

@@ -46,35 +46,35 @@ const Register = () => {
        <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Enter your username"
+          placeholder="Ẋay ċe yazye"
           name="username"
           value={form.username}
           onChange={handleChange}
         />
         <input
           type="email"
-          placeholder="Enter your email"
+          placeholder="Ẋay email yazye"
           name="email"
           value={form.email}
           onChange={handleChange}
         />
         <input
           type="password"
-          placeholder="Enter your password"
+          placeholder="Ẋay parol yazye"
           name="password"
           value={form.password}
           onChange={handleChange}
         />
         <input
           type="text"
-          placeholder="Your location"
+          placeholder="Ẋo jaş v(y)ol metig?"
           name="location"
           value={form.location}
           onChange={handleChange}
         />
         <input
           type="number"
-          placeholder="Your age"
+          placeholder="Mas şo du ẋan?"
           name="age"
           value={form.age}
           onChange={handleChange}

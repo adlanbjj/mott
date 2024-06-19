@@ -52,23 +52,23 @@ const Login = () => {
     <form onSubmit={handleSubmit}>
       <input
         type="text"
-        placeholder="Enter your username"
+        placeholder="Ẋay ċe yazye"
         name="username"
         value={form.username}
         onChange={handleChange}
       />
       <input
         type="password"
-        placeholder="Enter your password"
+        placeholder="Ẋay parol yazye"
         name="password"
         value={form.password}
         onChange={handleChange}
       />
-      <button type="submit">Login</button>
+      <button type="submit">Çuvala</button>
     </form>
     {error && <p style={{ color: 'red' }}>{error}</p>}
     <div className="forgot-password-link">
-        <Link to="/forgot-password">Forgot Password?</Link>
+        <Link to="/forgot-password">Parol yicyella?</Link>
       </div>
   </div>
   );

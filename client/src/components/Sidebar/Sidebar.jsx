@@ -25,10 +25,10 @@ const Sidebar = () => {
             <img src={user.avatar ? `http://localhost:3001${user.avatar}` : userAva} alt="User Avatar" className="user-avatar" />
             <div className="username">{user.username}</div>
             <Link to="/posts/create">
-              <button>Create Post</button>
+              <button>Post yita</button>
             </Link>
             <Link to="/dashboard">
-              <button>Edit profile</button>
+              <button>Profil xiyca</button>
             </Link>
           </>
         )}
@@ -40,7 +40,7 @@ const Sidebar = () => {
             "sidebar-link" + (isActive ? " active" : "")
           }
         >
-          Homepage
+          Körta aġo
         </NavLink>
         <NavLink
           to="/keyboard"
@@ -48,7 +48,7 @@ const Sidebar = () => {
             "sidebar-link" + (isActive ? " active" : "")
           }
         >
-          Keyboard
+          Noxçiyn abat
         </NavLink>
         <NavLink
           to="/user-list"
@@ -56,7 +56,7 @@ const Sidebar = () => {
             "sidebar-link" + (isActive ? " active" : "")
           }
         >
-          Top-users
+          Ġaraboylarş
         </NavLink>
         {user && (
           <NavLink
@@ -65,7 +65,7 @@ const Sidebar = () => {
               "sidebar-link" + (isActive ? " active" : "")
             }
           >
-            Messages
+            Kexataş
           </NavLink>
         )}
       </div>
