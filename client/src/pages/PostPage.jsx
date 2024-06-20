@@ -59,12 +59,13 @@ const PostPage = () => {
       {error && <div className="error">{error}</div>}
       {post && (
         <>
+                      <p> <Link to={`/user-profile/${post.author._id}`}>{post.author.username}</Link></p>
+
           <h2>{post.title}</h2>
           <p>{post.content}</p>
           {post.author ? (
             <>
-              <p><strong>Author:</strong> <Link to={`/user-profile/${post.author._id}`}>{post.author.username}</Link></p>
-              <p><strong>Created At:</strong> {new Date(post.createdAt).toLocaleString()}</p>
+              <p> {new Date(post.createdAt).toLocaleString()}</p>
             </>
           ) : (
             <p><strong>Author:</strong> Unknown</p>
