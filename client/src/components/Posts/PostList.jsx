@@ -22,7 +22,9 @@ const PostList = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch("http://localhost:3001/posts");
+        const response = await fetch("http://localhost:3001/posts", {
+          credentials: 'include',
+        });
         const data = await response.json();
         if (response.ok) {
           setPosts(data);
@@ -185,14 +187,15 @@ const PostList = () => {
               <div>
                 <div className="post-header">
                   <div className="author-info">
-                  
                     <div className="author-details">
                       <span className="author-name">
-                        {post.author.username}
+                        <Link to={`/user-profile/${post.author._id}`}>
+                          {post.author.username}
+                        </Link>{" "}
                       </span>
                     </div>
                   </div>
-                  {user && post.author && user._id === post.author._id && (
+                  {user && (user._id === post.author._id || user.isAdmin) && (
                     <div className="post-controls">
                       <FontAwesomeIcon
                         icon={faDeleteLeft}

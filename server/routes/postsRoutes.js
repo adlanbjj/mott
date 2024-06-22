@@ -1,6 +1,7 @@
 const express = require('express');
 const Posts = require('../models/Posts');
 const auth = require('../middleware/auth');
+const adminAuth = require('../middleware/adminAuth');
 const router = express.Router();
 
 router.post('/create', auth, async (req, res) => {
@@ -50,10 +51,14 @@ router.patch('/:id', auth, async (req, res) => {
   }
 
   try {
-    const post = await Posts.findOne({ _id: req.params.id, author: req.user._id });
+    const post = await Posts.findById(req.params.id);
 
     if (!post) {
       return res.status(404).send();
+    }
+
+    if (!req.user.isAdmin && post.author.toString() !== req.user._id.toString()) {
+      return res.status(403).send({ error: 'Permission denied' });
     }
 
     updates.forEach(update => post[update] = req.body[update]);
@@ -66,15 +71,20 @@ router.patch('/:id', auth, async (req, res) => {
 
 router.delete('/:id', auth, async (req, res) => {
   try {
-    const post = await Posts.findOneAndDelete({ _id: req.params.id, author: req.user._id });
+    const post = await Posts.findById(req.params.id);
 
     if (!post) {
-      return res.status(404).send();
+      return res.status(404).send({ error: 'Post not found' });
     }
 
-    res.send(post);
+    if (!req.user.isAdmin && post.author.toString() !== req.user._id.toString()) {
+      return res.status(403).send({ error: 'Permission denied' });
+    }
+
+    await post.deleteOne(); // Используем deleteOne вместо remove
+    res.send({ message: 'Post deleted successfully' });
   } catch (error) {
-    res.status(500).send(error);
+    res.status(500).send({ error: error.message });
   }
 });
 

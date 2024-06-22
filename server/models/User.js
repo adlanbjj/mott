@@ -15,6 +15,7 @@ const userSchema = new mongoose.Schema({
   avatar: String,
   resetPasswordToken: String,
   resetPasswordExpires: Date,
+  isAdmin: { type: Boolean, default: false }
 });
 
 userSchema.pre('deleteOne', { document: true, query: false }, async function(next) {

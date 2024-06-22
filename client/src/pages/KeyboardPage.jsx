@@ -53,45 +53,44 @@ const KeyboardPage = () => {
 
   return (
     <div className="keyboard-container">
-      <div className="input-container">
-        <textarea
-          value={inputValue}
-          onChange={handleInputChange}
-          className="keyboard-input"
-          rows="3"
+    <div className="input-container">
+      <textarea
+        value={inputValue}
+        onChange={handleInputChange}
+        className="keyboard-input"
+        rows="3"
+      />
+      {inputValue && (
+        <FontAwesomeIcon
+          icon={faTimes}
+          onClick={clearInput}
+          className="clear-icon"
         />
-        {inputValue && (
-          <FontAwesomeIcon
-            icon={faTimes}
-            onClick={clearInput}
-            className="clear-icon"
-          />
-        )}
-      </div>
-      <div className="keyboard">
-        {rows.map((row, index) => (
-          <div key={index} className="keyboard-row">
-            {row.map((letter) => (
-              <button
-                key={letter}
-                onClick={() => handleButtonClick(letter)}
-                className={`keyboard-button ${
-                  letter === "CAPS" && isCapsLock ? "active" : ""
-                } ${letter === "CAPS" ? "caps" : ""}`}
-              >
-                {letter !== "CAPS"
-                  ? isCapsLock
-                    ? letter.toUpperCase()
-                    : letter
-                  : "CAPS"}
-              </button>
-            ))}
-          </div>
-        ))}
-      </div>
-      <button onClick={handleWhatsAppShare}>WhatsApp çuxol yaẋita</button>
-      <button onClick={handleGmailShare}>Gmail çuxol yaẋita</button>
+      )}
     </div>
+    <div className="keyboard">
+      {rows.map((row, index) => (
+        <div key={index} className="keyboard-row">
+          {row.map((letter) => (
+            <button
+              key={letter}
+              onClick={() => handleButtonClick(letter)}
+              className={`keyboard-button ${
+                letter === "CAPS" && isCapsLock ? "active" : ""
+              } ${letter === "CAPS" ? "caps" : ""}`}
+            >
+              {letter !== "CAPS"
+                ? isCapsLock
+                  ? letter.toUpperCase()
+                  : letter
+                : "CAPS"}
+            </button>
+          ))}
+        </div>
+      ))}
+    </div>
+    <button onClick={handleWhatsAppShare} className="share-button">WhatsApp çuxol d'ayẋita</button>
+  </div>
   );
 };
 

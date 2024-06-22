@@ -1,35 +1,87 @@
+.userlist-cont {
+  border-radius: 25px;
+  padding: 40px;
+  max-width: 900px;
+  margin: 50px auto;
+  font-family: 'Montserrat', sans-serif;
+  color: #333;
+}
+
+.userlist-title {
+  text-align: center;
+  color: #757575;
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
 .user-card {
-  padding: 10px;
-  border: 1px solid #ccc;
-  margin: 10px;
+  background: #ffffff;
+  border-radius: 15px;
+  padding: 25px;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-
-.top-user:nth-child(1) {
-  border: 2px solid #ff4500; /* Оранжевый цвет для первого пользователя */
-}
-
-.top-user:nth-child(2) {
-  border: 2px solid #c0c0c0; /* Серебряный цвет для второго пользователя */
-}
-
-.top-user:nth-child(3) {
-  border: 2px solid #cd7f32; /* Бронзовый цвет для третьего пользователя */
-}
-
-.star {
-  color: gray;
-  font-size: 1.5em;
-  margin-right: 2px;
-}
-
-.star.filled {
-  color: gold;
+.user-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
 .user-stars {
   display: flex;
   align-items: center;
-  margin-bottom: 5px; /* Добавляем отступ снизу, чтобы звезды были выше счетчика постов */
+  margin-bottom: 10px;
+}
+
+.user-info {
+  font-size: 1.5rem;
+  color: #555;
+  margin-right: 10px;
+  font-weight: 500;
+}
+
+.star-rating {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+
+
+.post-info, .like-info {
+  font-size: 1.2rem;
+  color: #777;
+  margin-left: auto;
+}
+
+.noUsers {
+  font-size: 1.5rem;
+  color: #888;
+  text-align: center;
+  margin-top: 30px;
+}
+
+@media (max-width: 600px) {
+  .user-card {
+    flex-direction: column;
+    align-items: start;
+    padding: 20px;
+  }
+
+  .userlist-title {
+    font-size: 20px;
+  }
+
+  .user-info {
+    font-size: 1.2rem;
+  }
+
+  .star {
+    font-size: 1.5rem;
+  }
 }

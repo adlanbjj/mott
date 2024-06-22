@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
+const User = require('../models/User');
 require('dotenv').config();
 
-const adminAuth = (req, res, next) => {
+const adminAuth = async (req, res, next) => {
   const token = req.cookies.token;
 
   if (!token) {
@@ -10,10 +11,13 @@ const adminAuth = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    if (!decoded.isAdmin) {
+    const user = await User.findById(decoded.userId);
+
+    if (!user || !user.isAdmin) {
       throw new Error('Not an admin');
     }
-    req.user = decoded;
+
+    req.user = user;
     next();
   } catch (error) {
     res.status(401).send({ error: 'Please authenticate as admin.' });

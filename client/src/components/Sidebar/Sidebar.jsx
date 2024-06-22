@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
-  faUser,
   faKeyboard,
   faUsers,
-  faSignOut,
   faCaretLeft,
   faGear,
   faInfo,
