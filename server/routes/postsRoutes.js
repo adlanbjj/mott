@@ -14,7 +14,9 @@ router.post('/create', auth, async (req, res) => {
     });
 
     await post.save();
-    const populatedPost = await Posts.findById(post._id).populate('author', 'username');
+    const populatedPost = await Posts.findById(post._id)
+      .populate('author', 'username avatar')
+      .populate('comments.author', 'username avatar');
     res.status(201).send(populatedPost);
   } catch (error) {
     res.status(400).send({ error: error.message });
@@ -24,8 +26,8 @@ router.post('/create', auth, async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     const posts = await Posts.find().sort({ createdAt: -1 })
-      .populate('author', 'username')
-      .populate('comments.author', 'username');
+      .populate('author', 'username avatar')
+      .populate('comments.author', 'username avatar');
     res.status(200).send(posts);
   } catch (error) {
     res.status(400).send({ error: error.message });
@@ -35,8 +37,8 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const post = await Posts.findById(req.params.id)
-      .populate('author', 'username')
-      .populate('comments.author', 'username');
+      .populate('author', 'username avatar')
+      .populate('comments.author', 'username avatar');
     if (!post) {
       return res.status(404).send({ error: 'Post not found' });
     }
@@ -69,8 +71,8 @@ router.patch('/:id', auth, async (req, res) => {
     updates.forEach(update => post[update] = req.body[update]);
     await post.save();
     const populatedPost = await Posts.findById(post._id)
-      .populate('author', 'username')
-      .populate('comments.author', 'username');
+      .populate('author', 'username avatar')
+      .populate('comments.author', 'username avatar');
     res.send(populatedPost);
   } catch (error) {
     res.status(400).send(error);
@@ -116,8 +118,8 @@ router.post('/:id/comments', auth, async (req, res) => {
     post.comments.push(comment);
     await post.save();
     const populatedPost = await Posts.findById(post._id)
-      .populate('author', 'username')
-      .populate('comments.author', 'username');
+      .populate('author', 'username avatar')
+      .populate('comments.author', 'username avatar');
     res.status(201).send(populatedPost);
   } catch (error) {
     res.status(400).send({ error: error.message });
@@ -141,8 +143,8 @@ router.post('/:id/like', auth, async (req, res) => {
     await post.save();
 
     const populatedPost = await Posts.findById(post._id)
-      .populate('author', 'username')
-      .populate('comments.author', 'username');
+      .populate('author', 'username avatar')
+      .populate('comments.author', 'username avatar');
     res.status(200).send(populatedPost);
   } catch (error) {
     res.status(500).send({ error: 'Server error' });
@@ -166,8 +168,8 @@ router.post('/:id/dislike', auth, async (req, res) => {
     await post.save();
 
     const populatedPost = await Posts.findById(post._id)
-      .populate('author', 'username')
-      .populate('comments.author', 'username');
+      .populate('author', 'username avatar')
+      .populate('comments.author', 'username avatar');
     res.status(200).send(populatedPost);
   } catch (error) {
     res.status(500).send({ error: 'Server error' });

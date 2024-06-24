@@ -229,6 +229,11 @@ const PostList = () => {
                 <div className="post-header">
                   <div className="author-info">
                     <div className="author-details">
+                          <img
+                      src={`http://localhost:3001${post.author.avatar}`}
+                      alt='img'
+                      className="user-post-avatar"
+                    />
                       <span className="author-name">
                         <Link to={`/user-profile/${post.author._id}`}>
                           {post.author.username}
