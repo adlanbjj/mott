@@ -50,12 +50,13 @@
 
 .author-details {
   display: flex;
-  flex-direction: column;
+  align-items: center;
 }
 
 .author-name {
   font-weight: bold;
   color: rgb(92, 159, 223);
+  margin-right: 20px;
 }
 
 .post-time {
@@ -220,4 +221,9 @@
 
 .post-title {
   font-weight: 600;
+}
+
+.like-systeme-block {
+  display: flex;
+  align-items: center;
 }

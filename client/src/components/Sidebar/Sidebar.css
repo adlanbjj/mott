@@ -1,7 +1,5 @@
-@import url(https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900);
-
-
-
+/* General Styles */
+@import url("https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900");
 
 .container {
   display: flex;
@@ -23,18 +21,39 @@
   transition: all 0.3s;
 }
 
-.head {
+.sidebar.active {
+  width: 92px;
+}
+
+.sidebar-head {
   display: flex;
-  gap: 20px;
-  padding-bottom: 20px;
+  align-items: center;
   border-bottom: 1px solid #f6f6f6;
+  box-shadow: 0 1px 8px 0 rgb(236, 236, 236);
+  background-color: white;
+  border-radius: 9px;
+  padding-left: 5px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+
+.sidebar.active .sidebar-head {
+  justify-content: center;
 }
 
 .user-img {
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   overflow: hidden;
+  object-fit: cover;
+  box-shadow: 0 1px 10px 0 rgb(223, 223, 223);
+  position: relative;
+}
+
+.sidebar.active .user-img {
+  display: flex;
+  align-items: center;
 }
 
 .user-img img {
@@ -52,9 +71,52 @@
   margin-bottom: 10px;
 }
 
-.user-details .name {
+.sidebar-username {
   font-size: 14px;
   font-weight: 500;
+  margin-right: 30px;
+  margin-left: 10px;
+}
+
+.sidebar.active .sidebar-username {
+  display: none;
+}
+
+.user-details {
+  display: flex;
+}
+
+.add-post-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+
+.add-post-button:hover {
+  background-color: #0056b3;
+}
+
+.sidebar.active .add-post-button {
+  width: 50px;
+  padding: 5px;
+}
+
+.add-post-button .text {
+  margin-left: 10px;
+}
+
+.sidebar.active .add-post-button .text {
+  display: none;
 }
 
 .nav {
@@ -125,7 +187,7 @@
 .menu-btn {
   position: absolute;
   right: -14px;
-  top: 3.5%;
+  top: 4%;
   width: 28px;
   height: 28px;
   border-radius: 8px;
@@ -144,10 +206,6 @@
 
 .menu-btn i {
   transition: all 0.3s;
-}
-
-.sidebar.active {
-  width: 92px;
 }
 
 .sidebar.active .menu-btn i {
@@ -219,4 +277,30 @@
 
 .rotate-180 {
   transform: rotate(180deg);
+}
+
+.side-add-link {
+  font-size: 12px;
+  text-decoration: none;
+  color: black;
+}
+
+.add-icon {
+  color: white;
+  font-size: 1.5em;
+}
+
+.sign-in-button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #4c96e5;
+  width: 100px;
+  color: white;
+}
+
+.sign-in-button:hover {
+  background-color: #2f89e9;
 }

@@ -8,12 +8,14 @@ import {
   faGear,
   faInfo,
   faEnvelope,
+  faPlusCircle,
+  faSignOut,
 } from "@fortawesome/free-solid-svg-icons";
 import { useUser } from "../../context/userContext";
 import { Link, NavLink } from "react-router-dom";
 import defaultAvatar from "../../public/images/default-avatar.png";
 import "../Sidebar/Sidebar.css";
-import { faGithub, faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import { faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
 const Sidebar = () => {
   const { user, logout } = useUser();
@@ -27,20 +29,39 @@ const Sidebar = () => {
   return (
     <div className={`sidebar ${isSidebarActive ? "active" : ""}`}>
       <div className="menu-btn" onClick={toggleSidebar}>
-        <FontAwesomeIcon icon={faCaretLeft} className={isSidebarActive ? "rotate-180" : ""} />
+        <FontAwesomeIcon
+          icon={faCaretLeft}
+          className={isSidebarActive ? "rotate-180" : ""}
+        />
       </div>
-      <div className="head">
+      <div className="sidebar-head">
         <div className="user-img">
-          <img src={user?.avatar ? `http://localhost:3001${user.avatar}` : userAva} alt="User Avatar" />
+          <img
+            src={user?.avatar ? `http://localhost:3001${user.avatar}` : userAva}
+            alt="User Avatar"
+          />
         </div>
         <div className="user-details">
-          <p className="title">UI/UX Designer</p>
-          <p className="name">{user?.username}</p>
+          <p className="sidebar-username">{user?.username}</p>
+          {!user && (
+            <button
+              className="sign-in-button"
+              onClick={() => (window.location.href = "/auth")}
+            >
+            Çuġo
+            </button>
+          )}
         </div>
       </div>
+      {user && (
+        <Link to="/posts/create" className="add-post-button">
+          <FontAwesomeIcon icon={faPlusCircle} />
+          <span className="text">Yu Post</span>
+        </Link>
+      )}
       <div className="nav">
         <div className="menu">
-          <p className="title">Main</p>
+          <p className="title">Körta menu</p>
           <ul>
             <li>
               <NavLink to="/">
@@ -72,7 +93,7 @@ const Sidebar = () => {
         </div>
         {user && (
           <div className="menu">
-            <p className="title">Settings</p>
+            <p className="title">Account</p>
             <ul>
               <li>
                 <NavLink to="/dashboard">
@@ -80,36 +101,40 @@ const Sidebar = () => {
                   <span className="text">Settings</span>
                 </NavLink>
               </li>
+              <li>
+                <NavLink to="/logout" onClick={logout}>
+                  <FontAwesomeIcon icon={faSignOut} className="icon" />
+                  <span className="text">Logout</span>
+                </NavLink>
+              </li>
             </ul>
           </div>
         )}
         <div className="menu">
-          <p className="title">Social media</p>
-          <ul>
-            <li>
-              <NavLink to="https://instagram.com">
-                <FontAwesomeIcon icon={faInstagram} className="icon" />
-                <span className="text">Instagram</span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="https://linkedin.com">
-                <FontAwesomeIcon icon={faLinkedin} className="icon" />
-                <span className="text">LinkedIn</span>
-              </NavLink>
-            </li>
-          </ul>
-        </div>
-        <div className="menu">
           <p className="title">About</p>
           <ul>
+            {!user && (
+              <li>
+                <NavLink to="https://instagram.com">
+                  <FontAwesomeIcon icon={faInstagram} className="icon" />
+                  <span className="text">Instagram</span>
+                </NavLink>
+              </li>
+            )}
+            {!user && (
+              <li>
+                <NavLink to="https://linkedin.com">
+                  <FontAwesomeIcon icon={faLinkedin} className="icon" />
+                  <span className="text">LinkedIn</span>
+                </NavLink>
+              </li>
+            )}
             <li>
               <NavLink to="/faq">
                 <FontAwesomeIcon icon={faInfo} className="icon" />
                 <span className="text">FAQ</span>
               </NavLink>
             </li>
-           
           </ul>
         </div>
       </div>

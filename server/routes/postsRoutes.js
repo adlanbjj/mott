@@ -14,7 +14,8 @@ router.post('/create', auth, async (req, res) => {
     });
 
     await post.save();
-    res.status(201).send(post);
+    const populatedPost = await Posts.findById(post._id).populate('author', 'username');
+    res.status(201).send(populatedPost);
   } catch (error) {
     res.status(400).send({ error: error.message });
   }
@@ -22,7 +23,9 @@ router.post('/create', auth, async (req, res) => {
 
 router.get('/', async (req, res) => {
   try {
-    const posts = await Posts.find().sort({ createdAt: -1 }).populate('author', 'username');
+    const posts = await Posts.find().sort({ createdAt: -1 })
+      .populate('author', 'username')
+      .populate('comments.author', 'username');
     res.status(200).send(posts);
   } catch (error) {
     res.status(400).send({ error: error.message });
@@ -31,7 +34,9 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    const post = await Posts.findById(req.params.id).populate('author', 'username').populate('comments.author', 'username');
+    const post = await Posts.findById(req.params.id)
+      .populate('author', 'username')
+      .populate('comments.author', 'username');
     if (!post) {
       return res.status(404).send({ error: 'Post not found' });
     }
@@ -63,7 +68,10 @@ router.patch('/:id', auth, async (req, res) => {
 
     updates.forEach(update => post[update] = req.body[update]);
     await post.save();
-    res.send(post);
+    const populatedPost = await Posts.findById(post._id)
+      .populate('author', 'username')
+      .populate('comments.author', 'username');
+    res.send(populatedPost);
   } catch (error) {
     res.status(400).send(error);
   }
@@ -81,7 +89,7 @@ router.delete('/:id', auth, async (req, res) => {
       return res.status(403).send({ error: 'Permission denied' });
     }
 
-    await post.deleteOne(); // Используем deleteOne вместо remove
+    await post.deleteOne(); 
     res.send({ message: 'Post deleted successfully' });
   } catch (error) {
     res.status(500).send({ error: error.message });
@@ -107,7 +115,9 @@ router.post('/:id/comments', auth, async (req, res) => {
 
     post.comments.push(comment);
     await post.save();
-    const populatedPost = await Posts.findById(post._id).populate('comments.author', 'username');
+    const populatedPost = await Posts.findById(post._id)
+      .populate('author', 'username')
+      .populate('comments.author', 'username');
     res.status(201).send(populatedPost);
   } catch (error) {
     res.status(400).send({ error: error.message });
@@ -130,10 +140,10 @@ router.post('/:id/like', auth, async (req, res) => {
 
     await post.save();
 
-    const posts = await Posts.find({ author: post.author });
-    const likeCount = posts.reduce((acc, post) => acc + (post.likes ? post.likes.length : 0), 0);
-
-    res.status(200).send({ post, likeCount });
+    const populatedPost = await Posts.findById(post._id)
+      .populate('author', 'username')
+      .populate('comments.author', 'username');
+    res.status(200).send(populatedPost);
   } catch (error) {
     res.status(500).send({ error: 'Server error' });
   }
@@ -155,10 +165,10 @@ router.post('/:id/dislike', auth, async (req, res) => {
 
     await post.save();
 
-    const posts = await Posts.find({ author: post.author });
-    const likeCount = posts.reduce((acc, post) => acc + (post.likes ? post.likes.length : 0), 0);
-
-    res.status(200).send({ post, likeCount });
+    const populatedPost = await Posts.findById(post._id)
+      .populate('author', 'username')
+      .populate('comments.author', 'username');
+    res.status(200).send(populatedPost);
   } catch (error) {
     res.status(500).send({ error: 'Server error' });
   }

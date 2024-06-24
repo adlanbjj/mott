@@ -36,11 +36,6 @@ const CreatePost = ({ onPostCreated }) => {
   return (
     <div className="post-create-container">
     <div className="post-header">
-      <img src="https://via.placeholder.com/40" alt="User Avatar" className="avatar" />
-      <div className="user-info">
-        <span className="username">Ezra Aung</span>
-        <span className="user-handle">@ezraaung</span>
-      </div>
       <button className="close-button">&times;</button>
     </div>
     <form onSubmit={handleSubmit}>
@@ -60,18 +55,7 @@ const CreatePost = ({ onPostCreated }) => {
         required
       />
       <div className="post-footer">
-        <div className="post-options">
-          <button type="button" className="option-button">
-            <i className="fas fa-globe"></i> Anyone
-          </button>
-          <div className="icon-buttons">
-            <button type="button"><i className="fas fa-camera"></i></button>
-            <button type="button"><i className="fas fa-video"></i></button>
-            <button type="button"><i className="fas fa-image"></i></button>
-            <button type="button"><i className="fas fa-map-marker-alt"></i></button>
-            <button type="button"><i className="fas fa-ellipsis-h"></i></button>
-          </div>
-        </div>
+      
         <button type="submit" className="post-button">Post</button>
       </div>
     </form>

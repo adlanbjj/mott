@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useUser } from '../context/userContext';
 import StarRating from "../components/Raiting/StarRating";
 import "../public/styles/ProfilePage.css";
 
 function ProfilePage() {
   const { userId } = useParams();
-  const [user, setUser] = useState(null);
+  const { user: currentUser } = useUser();
+  const [profileUser, setProfileUser] = useState(null);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [messageError, setMessageError] = useState("");
@@ -25,7 +27,7 @@ function ProfilePage() {
           );
           if (response.ok) {
             const data = await response.json();
-            setUser(data);
+            setProfileUser(data);
           } else {
             throw new Error("Failed to fetch user");
           }
@@ -72,49 +74,58 @@ function ProfilePage() {
     return <div>Error: {error}</div>;
   }
 
-  if (!user) {
+  if (!profileUser) {
     return <div>Loading...</div>;
   }
+
+  const isCurrentUserProfile = currentUser && currentUser._id === userId;
 
   return (
     <div className="profile-container">
       <div className="profile-card">
         <div className="left-card">
           <img
-            src={`http://localhost:3001${user.avatar}`}
-            alt={`${user.username}'s avatar`}
+            src={`http://localhost:3001${profileUser.avatar}`}
+            alt={`${profileUser.username}'s avatar`}
             className="profile-avatar"
           />
           <div className="profile-details">
             <div className="profile-contact">
-              <button
-                className="contact-button"
-                onClick={() => setShowMessageField(!showMessageField)}
-              >
-                Contact
-              </button>
-              <button className="resume-button">Resume</button>
+              {!isCurrentUserProfile && (
+                <>
+                  <button
+                    className="contact-button"
+                    onClick={() => setShowMessageField(!showMessageField)}
+                  >
+                    Contact
+                  </button>
+                  <button className="resume-button">Resume</button>
+                </>
+              )}
+              {isCurrentUserProfile && (
+                <button className="resume-button">Resume</button>
+              )}
             </div>
           </div>
         </div>
 
         <div className="profile-info-section">
-          <h1 className="profile-name">{user.username}</h1>
-          <StarRating likeCount={user.likeCount} />
+          <h1 className="profile-name">{profileUser.username}</h1>
+          <StarRating likeCount={profileUser.likeCount} />
           <p>
-            <strong>Posts:</strong> {user.postCount}
+            <strong>Posts:</strong> {profileUser.postCount}
           </p>
           <p>
-            <strong>Likes:</strong> {user.likeCount}
+            <strong>Likes:</strong> {profileUser.likeCount}
           </p>
           <p>
-            <strong>Age:</strong> {user.age}
+            <strong>Age:</strong> {profileUser.age}
           </p>
           <p>
-            <strong>Location:</strong> {user.location}
+            <strong>Location:</strong> {profileUser.location}
           </p>
           <p>
-            <strong>Years experience:</strong> {user.experience}
+            <strong>Years experience:</strong> {profileUser.experience}
           </p>
         </div>
       </div>

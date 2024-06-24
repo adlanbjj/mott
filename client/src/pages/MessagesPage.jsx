@@ -112,7 +112,7 @@ function MessagesPage({ onClose }) {
                 <span className="name">{conv.username}</span>
                 <span className="preview">{truncateMessage(conv.latestMessage)}</span>
                 <span className="time">
-                  {new Date(conv.lastMessageTime).toLocaleTimeString('it-IT', {timeStyle: 'short'})}
+                  {new Date(conv.lastMessageTime).toLocaleTimeString('fr-FR', {timeStyle: 'short'})}
                 </span>
               </div>
             ))}

@@ -35,20 +35,20 @@ const ForgotPassword = () => {
 
   return (
     <div className="forgot-password-container">
-      <h2>Forgot Password</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Enter your email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <button type="submit">Send Reset Link</button>
-      </form>
-      {message && <div className="message">{message}</div>}
-      {error && <div className="error">{error}</div>}
-    </div>
+    <h2>Parol qossa</h2>
+    <form onSubmit={handleSubmit}>
+      <input
+        type="email"
+        placeholder="Djayazde ẋayn elektronan poştan adres"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+      />
+      <button type="submit">Parol qossa</button>
+    </form>
+    {message && <div className="message">{message}</div>}
+    {error && <div className="error">{error}</div>}
+  </div>
   );
 };
 

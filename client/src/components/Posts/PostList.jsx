@@ -18,6 +18,8 @@ const PostList = () => {
   const [editingPost, setEditingPost] = useState(null);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [showComments, setShowComments] = useState({});
+  const [newComment, setNewComment] = useState("");
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -138,6 +140,45 @@ const PostList = () => {
     }
   };
 
+  const handleCommentToggle = (postId) => {
+    setShowComments((prevState) => ({
+      ...prevState,
+      [postId]: !prevState[postId],
+    }));
+  };
+
+  const handleCommentSubmit = async (e, postId) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(
+        `http://localhost:3001/posts/${postId}/comments`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ content: newComment }),
+          credentials: "include",
+        }
+      );
+
+      const data = await response.json();
+      if (response.ok) {
+        setPosts(posts.map((post) => (post._id === postId ? data : post)));
+        setNewComment("");
+        setShowComments((prevState) => ({
+          ...prevState,
+          [postId]: true,
+        }));
+      } else {
+        setError(data.error);
+      }
+    } catch (error) {
+      console.error("Error submitting comment:", error);
+      setError("An error occurred. Please try again later.");
+    }
+  };
+
   const truncateText = (text, wordLimit) => {
     if (!text) return "";
     const words = text.split(" ");
@@ -173,14 +214,14 @@ const PostList = () => {
                   className="edit-textarea"
                 ></textarea>
                 <button type="submit" className="edit-button">
-                  Update
+                  Karl yaqa
                 </button>
                 <button
                   type="button"
                   onClick={() => setEditingPost(null)}
                   className="edit-button cancel-button"
                 >
-                  Cancel
+                  Saciyta
                 </button>
               </form>
             ) : (
@@ -192,6 +233,9 @@ const PostList = () => {
                         <Link to={`/user-profile/${post.author._id}`}>
                           {post.author.username}
                         </Link>{" "}
+                      </span>
+                      <span className="post-time">
+                        {new Date(post.createdAt).toLocaleTimeString('fr-FR', { timeStyle: 'short' })}
                       </span>
                     </div>
                   </div>
@@ -215,6 +259,16 @@ const PostList = () => {
                 <div className="post-actions">
                   <div className="left-actions">
                     <button
+                      onClick={() => handleCommentToggle(post._id)}
+                      className="comment-button"
+                    >
+                      <FontAwesomeIcon icon={faComment} />{" "}
+                      {post.comments.length}
+                      <p>Comments</p>
+                    </button>
+                  </div>
+                  <div className="like-systeme-block">
+                    <button
                       onClick={(e) => {
                         e.stopPropagation();
                         handleLike(post._id);
@@ -234,20 +288,37 @@ const PostList = () => {
                       <FontAwesomeIcon icon={faThumbsDown} className="icon" />{" "}
                       {post.dislikes ? post.dislikes.length : 0}
                     </button>
-                    <button className="comment-button">
-                      <FontAwesomeIcon icon={faComment} />{" "}
-                      {post.comments.length}
-                    </button>
-                  </div>
-                  <div className="red-and-data">
-                    <Link to={`/posts/${post._id}`} className="read-more-link">
-                      Read more
-                    </Link>
-                    <span className="post-time">
-                      {new Date(post.createdAt).toLocaleString()}
-                    </span>
                   </div>
                 </div>
+                {showComments[post._id] && (
+                  <div className="comments-section">
+                    {post.comments.map((comment) => (
+                      <div className="comment" key={comment._id}>
+                        <div className="comment-content">
+                          <div className="comment-author">
+                            <Link to={`/user-profile/${comment.author._id}`}>
+                              {comment.author.username}
+                            </Link>
+                          </div>
+                          <div className="comment-text">{comment.content}</div>
+                        </div>
+                      </div>
+                    ))}
+                    {user && (
+                      <form
+                        onSubmit={(e) => handleCommentSubmit(e, post._id)}
+                      >
+                        <textarea
+                          placeholder="Add a comment"
+                          value={newComment}
+                          onChange={(e) => setNewComment(e.target.value)}
+                          required
+                        ></textarea>
+                        <button type="submit">Submit Comment</button>
+                      </form>
+                    )}
+                  </div>
+                )}
               </div>
             )}
           </div>

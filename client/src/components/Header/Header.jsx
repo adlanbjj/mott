@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Header.css";
 import Search from "../Search/Search";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBell, faPowerOff, faSignOut, faUser } from "@fortawesome/free-solid-svg-icons";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useUser } from "../../context/userContext";
 import Myimage from "../../public/images/mott-logo.png";
+import chechenFlag from "../../public/images/chechen-flag.png";
+import englishFlag from "../../public/images/english-flag.png";
 
 const Header = () => {
   const { user, logout } = useUser();
+  const [language, setLanguage] = useState("Che");
+  const [flag, setFlag] = useState(chechenFlag);
+
+  const handleLanguageChange = (lang, flag) => {
+    setLanguage(lang);
+    setFlag(flag);
+  };
 
   return (
     <div className="header-container">
@@ -19,20 +26,20 @@ const Header = () => {
         <Search />
       </div>
       <div className="header-user-block">
-        {!user ? (
-          <Link to="/auth" className="header-link">
-            Çuvala
-          </Link>
-        ) : (
-          <div className="logout-block">
-            <li>
-              <NavLink to="/logout" onClick={logout}>
-                <FontAwesomeIcon icon={faSignOut} className="icon" />
-                <span className="text">Logout</span>
-              </NavLink>
-            </li>
+       
+        <div className="language-selector">
+          <button>
+            {language} <img src={flag} alt="flag" />
+          </button>
+          <div className="language-dropdown">
+            <a href="#" onClick={() => handleLanguageChange("Che", chechenFlag)}>
+              Chechen <img src={chechenFlag} alt="Chechen flag" />
+            </a>
+            <a href="#" onClick={() => handleLanguageChange("Eng", englishFlag)}>
+              English <img src={englishFlag} alt="English flag" />
+            </a>
           </div>
-        )}
+        </div>
       </div>
     </div>
   );

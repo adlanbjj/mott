@@ -58,62 +58,66 @@ const PostPage = () => {
   };
 
   return (
-    <div className="post-page-container">
+    <div className="post-page-wrapper">
       {error && <div className="error">{error}</div>}
       {post && (
-        <>
-          <p>
-            {" "}
-            <Link to={`/user-profile/${post.author._id}`}>
-              {post.author.username}
-            </Link>
-          </p>
-
-          <h2>{post.title}</h2>
-          <p>{post.content}</p>
-          {post.author ? (
-            <>
-              <p> {new Date(post.createdAt).toLocaleString()}</p>
-            </>
-          ) : (
-            <p>
-              <strong>Author:</strong> Unknown
-            </p>
-          )}
-          <div className="postpage-comments-section">
-            <h4>Comments:</h4>
-            {post.comments.map((comment) => (
-              <div key={comment._id} className="postpage-comment">
-                <p>{comment.content}</p>
-                {comment.author ? (
-                  <>
-                    <p>
-                      <strong>Author:</strong>{" "}
-                      <Link to={`/user-profile/${comment.author._id}`}>
-                        {comment.author.username}
-                      </Link>
-                    </p>
-                  </>
-                ) : (
-                  <p>
-                    <strong>Author:</strong> Unknown
-                  </p>
-                )}
+        <div className="comment">
+          <div>
+            <div className="content">
+              <div className="avatar">
+                <img src={`http://localhost:3001${post.author.avatar}`} alt={post.author.username} />
               </div>
-            ))}
-            {user && (
-              <form onSubmit={handleCommentSubmit}>
-                <textarea
-                  placeholder="Add a comment"
-                  value={newComment}
-                  onChange={(e) => setNewComment(e.target.value)}
-                  required
-                ></textarea>
-                <button type="submit">Submit Comment</button>
-              </form>
-            )}
+              <div className="content-comment">
+                <div className="user">
+                  <h5>
+                    <Link to={`/user-profile/${post.author._id}`}>
+                      {post.author.username}
+                    </Link>
+                  </h5>
+                  <span className="is-mute">{new Date(post.createdAt).toLocaleDateString()}</span>
+                </div>
+                <p>{post.content}</p>
+              </div>
+            </div>
+            <div className="footer"></div>
           </div>
-        </>
+          <div className="subcomment">
+            <div className="other_comments">
+              {post.comments.map((comment) => (
+                <div className="com" key={comment._id}>
+                  <div className="content">
+                    <div className="avatar">
+                      <img src={`http://localhost:3001${comment.author.avatar}`} alt={comment.author.username} />
+                    </div>
+                    <div className="content-comment">
+                      <div className="user">
+                        <h5>
+                          <Link to={`/user-profile/${comment.author._id}`}>
+                            {comment.author.username}
+                          </Link>
+                        </h5>
+                        <span className="is-mute">{new Date(comment.createdAt).toLocaleDateString()}</span>
+                      </div>
+                      <p>{comment.content}</p>
+                    </div>
+                  </div>
+                  <div className="footer"></div>
+                </div>
+              ))}
+              {user && (
+                <form onSubmit={handleCommentSubmit}>
+                  <textarea
+                    placeholder="Add a comment"
+                    value={newComment}
+                    onChange={(e) => setNewComment(e.target.value)}
+                    required
+                  ></textarea>
+                  <button type="submit">Submit Comment</button>
+                </form>
+              )}
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
