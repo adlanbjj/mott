@@ -264,7 +264,7 @@ const PostList = () => {
                     onClick={() => handleCommentToggle(post._id)}
                     className="btn btn-comment"
                   >
-                    <FontAwesomeIcon icon={faComment} className="icon" /> Comments{" "}
+                    <FontAwesomeIcon icon={faComment} className="icon" /> Kommentareş{" "}
                     {post.comments.length}
                   </button>
                   <div className="btn-container">
