@@ -112,3 +112,15 @@
 .language-selector:hover .language-dropdown {
   display: block;
 }
+
+@media (max-width: 768px) {
+  .header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .language-selector {
+    display: none;
+  }
+}

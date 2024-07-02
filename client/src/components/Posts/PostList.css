@@ -200,3 +200,82 @@
 .edit-button.cancel-button:hover {
   background-color: #c82333;
 }
+
+
+/* Media Queries for Mobile Responsiveness */
+@media (max-width: 768px) {
+  .post-list-container {
+    max-width: 90%;
+    margin: 1rem auto;
+    padding: 0.5rem;
+  }
+
+  .post-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .user-post-avatar, .avatar {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+  }
+
+  .content h3 {
+    font-size: 1rem;
+  }
+
+  .content .title {
+    font-size: 0.75rem;
+  }
+
+  .content .updated {
+    font-size: 0.625rem;
+  }
+
+  .control-icon {
+    font-size: 0.875rem;
+  }
+
+  .post-title, .post-content {
+    margin: 0.25rem 0;
+  }
+
+  .post-actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .btn {
+    font-size: 0.75rem;
+  }
+
+  .btn-container {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .comment {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .add-comment {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .textfield input {
+    padding: 0.25rem;
+  }
+
+  .btn-camera {
+    padding: 0.25rem;
+  }
+
+  .edit-button {
+    padding: 0.25rem 0.5rem;
+  }
+}

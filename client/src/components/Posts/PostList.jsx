@@ -238,7 +238,9 @@ const PostList = () => {
                     />
                   </figure>
                   <div className="content">
-                    <h3>{post.author.username}</h3>
+                            <Link to={`/user-profile/${post.author._id}`}>
+                              {post.author.username}
+                            </Link>
                   </div>
                   <span className="updated">
                       {new Date(post.createdAt).toLocaleTimeString("fr-FR", {
