@@ -23,10 +23,13 @@ const PostList = () => {
   const [showComments, setShowComments] = useState({});
   const [newComment, setNewComment] = useState("");
 
+  const apiUrl = process.env.REACT_APP_API_URL;
+
+
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch("https://mott-server-f5c8bc5b637d.herokuapp.com/posts", {
+        const response = await fetch(`${apiUrl}/posts`, {
           credentials: "include",
         });
         const data = await response.json();
