@@ -66,7 +66,7 @@ const Sidebar = () => {
     {user && (
       <Link to="/posts/create" className="add-post-button">
         <FontAwesomeIcon icon={faPlusCircle} />
-        <span className="text">Yu Post</span>
+        <span className="text">Yuq̇toxa Post</span>
       </Link>
     )}
     <div className="nav">
@@ -85,12 +85,12 @@ const Sidebar = () => {
               <span className="text">Klaviatur</span>
             </NavLink>
           </li>
-          <li>
+          {/* <li>
             <NavLink to="/user-list">
               <FontAwesomeIcon icon={faUsers} className="icon" />
               <span className="text">Ƶigarxoy</span>
             </NavLink>
-          </li>
+          </li> */}
           {user && (
             <li>
               <NavLink to="/messages">

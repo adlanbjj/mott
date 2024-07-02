@@ -62,3 +62,27 @@
     border-radius: 50%;
     object-fit: cover;
   }
+
+  @media (max-width: 768px) {
+    .dashboard-container {
+      padding: 10px;
+      border-radius: 5px;
+    }
+  
+    .dashboard-container h1 {
+      font-size: 1.5rem; 
+    }
+  
+    .form-group input, .update-button {
+      padding: 8px;
+    }
+  
+    .update-button {
+      font-size: 0.9rem;
+    }
+  
+    .user-avatar {
+      width: 50px; 
+      height: 50px;
+    }
+  }
