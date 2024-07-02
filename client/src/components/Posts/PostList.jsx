@@ -221,7 +221,7 @@ const PostList = () => {
                   onClick={() => setEditingPost(null)}
                   className="edit-button cancel-button"
                 >
-                  Cancel
+                  Yuxvala
                 </button>
               </form>
             ) : (
