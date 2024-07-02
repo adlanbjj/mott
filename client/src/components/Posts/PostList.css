@@ -202,7 +202,6 @@
 }
 
 
-/* Media Queries for Mobile Responsiveness */
 @media (max-width: 768px) {
   .post-list-container {
     max-width: 90%;
@@ -211,9 +210,8 @@
   }
 
   .post-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
+    flex-direction: row;
+    align-items: center;
   }
 
   .user-post-avatar, .avatar {
@@ -234,6 +232,19 @@
     font-size: 0.625rem;
   }
 
+  .post {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .post-controls {
+    order: 3;
+    width: 100%;
+    display: flex;
+    justify-content: space-around; 
+  }
+
   .control-icon {
     font-size: 0.875rem;
   }
@@ -243,8 +254,10 @@
   }
 
   .post-actions {
-    flex-direction: column;
-    align-items: flex-start;
+    order: 2; 
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     gap: 0.5rem;
   }
 
@@ -253,7 +266,7 @@
   }
 
   .btn-container {
-    flex-direction: column;
+    display: flex;
     gap: 0.25rem;
   }
 

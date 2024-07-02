@@ -101,6 +101,16 @@
   text-decoration: none;
 }
 
+.add-post-mobile-button {
+  display: none;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
 .add-post-button:hover {
   background-color: #0056b3;
 }
@@ -379,6 +389,18 @@
   .menu:not(:last-child) {
     padding: 0;
     margin: 0;
+  }
+
+  .add-post-button {
+    display: none;
+  }
+
+  .add-post-button {
+    display: none;
+  }
+
+  .add-post-mobile-button {
+    display: block;
   }
 
 }
