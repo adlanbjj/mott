@@ -12,7 +12,7 @@ function UserList() {
     const fetchUsers = async () => {
       try {
         const response = await fetch(
-          "http://localhost:3001/auth/user-ranking",
+          "https://mott-server-f5c8bc5b637d.herokuapp.com/auth/user-ranking",
           {
             credentials: "include",
           }

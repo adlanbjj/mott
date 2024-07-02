@@ -10,7 +10,7 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch("http://localhost:3001/auth/user", {
+        const response = await fetch("https://mott-server-f5c8bc5b637d.herokuapp.com/auth/user", {
           credentials: 'include',
         });
 

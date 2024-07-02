@@ -17,7 +17,7 @@ const EditUser = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch(`http://localhost:3001/auth/admin/users/${id}`, {
+        const response = await fetch(`https://mott-server-f5c8bc5b637d.herokuapp.com/auth/admin/users/${id}`, {
           credentials: 'include',
         });
         const data = await response.json();
@@ -51,7 +51,7 @@ const EditUser = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:3001/auth/admin/users/${id}`, {
+      const response = await fetch(`https://mott-server-f5c8bc5b637d.herokuapp.com/auth/admin/users/${id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

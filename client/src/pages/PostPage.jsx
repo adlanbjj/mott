@@ -13,7 +13,7 @@ const PostPage = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await fetch(`http://localhost:3001/posts/${id}`);
+        const response = await fetch(`https://mott-server-f5c8bc5b637d.herokuapp.com/posts/${id}`);
         const data = await response.json();
         if (response.ok) {
           setPost(data);
@@ -32,7 +32,7 @@ const PostPage = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:3001/posts/${id}/comments`,
+        `https://mott-server-f5c8bc5b637d.herokuapp.com/posts/${id}/comments`,
         {
           method: "POST",
           headers: {
@@ -65,7 +65,7 @@ const PostPage = () => {
           <div>
             <div className="content">
               <div className="avatar">
-                <img src={`http://localhost:3001${post.author.avatar}`} alt={post.author.username} />
+                <img src={`https://mott-server-f5c8bc5b637d.herokuapp.com${post.author.avatar}`} alt={post.author.username} />
               </div>
               <div className="content-comment">
                 <div className="user">
@@ -87,7 +87,7 @@ const PostPage = () => {
                 <div className="com" key={comment._id}>
                   <div className="content">
                     <div className="avatar">
-                      <img src={`http://localhost:3001${comment.author.avatar}`} alt={comment.author.username} />
+                      <img src={`https://mott-server-f5c8bc5b637d.herokuapp.com${comment.author.avatar}`} alt={comment.author.username} />
                     </div>
                     <div className="content-comment">
                       <div className="user">

@@ -6,8 +6,10 @@ import {
   faThumbsUp,
   faThumbsDown,
   faComment,
-  faDeleteLeft,
   faEdit,
+  faTrashAlt,
+  faShare,
+  faPaperPlane,
 } from "@fortawesome/free-solid-svg-icons";
 import "./PostList.css";
 
@@ -24,8 +26,8 @@ const PostList = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch("http://localhost:3001/posts", {
-          credentials: 'include',
+        const response = await fetch("https://mott-server-f5c8bc5b637d.herokuapp.com/posts", {
+          credentials: "include",
         });
         const data = await response.json();
         if (response.ok) {
@@ -51,7 +53,7 @@ const PostList = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:3001/posts/${editingPost}`,
+        `https://mott-server-f5c8bc5b637d.herokuapp.com/posts/${editingPost}`,
         {
           method: "PATCH",
           headers: {
@@ -77,7 +79,7 @@ const PostList = () => {
 
   const handleDelete = async (postId) => {
     try {
-      const response = await fetch(`http://localhost:3001/posts/${postId}`, {
+      const response = await fetch(`https://mott-server-f5c8bc5b637d.herokuapp.com/posts/${postId}`, {
         method: "DELETE",
         credentials: "include",
       });
@@ -97,20 +99,18 @@ const PostList = () => {
   const handleLike = async (postId) => {
     try {
       const response = await fetch(
-        `http://localhost:3001/posts/${postId}/like`,
+        `https://mott-server-f5c8bc5b637d.herokuapp.com/posts/${postId}/like`,
         {
           method: "POST",
           credentials: "include",
         }
       );
+      const data = await response.json();
       if (response.ok) {
-        const { post: updatedPost, likeCount } = await response.json();
-        setPosts(
-          posts.map((post) => (post._id === postId ? updatedPost : post))
-        );
+        setPosts(posts.map((post) => (post._id === postId ? data : post)));
+        setError("");
       } else {
-        const data = await response.json();
-        setError(data.error);
+        setError(data.error || "An error occurred. Please try again later.");
       }
     } catch (error) {
       setError("An error occurred. Please try again later.");
@@ -120,20 +120,18 @@ const PostList = () => {
   const handleDislike = async (postId) => {
     try {
       const response = await fetch(
-        `http://localhost:3001/posts/${postId}/dislike`,
+        `https://mott-server-f5c8bc5b637d.herokuapp.com/posts/${postId}/dislike`,
         {
           method: "POST",
           credentials: "include",
         }
       );
+      const data = await response.json();
       if (response.ok) {
-        const { post: updatedPost, likeCount } = await response.json();
-        setPosts(
-          posts.map((post) => (post._id === postId ? updatedPost : post))
-        );
+        setPosts(posts.map((post) => (post._id === postId ? data : post)));
+        setError("");
       } else {
-        const data = await response.json();
-        setError(data.error);
+        setError(data.error || "An error occurred. Please try again later.");
       }
     } catch (error) {
       setError("An error occurred. Please try again later.");
@@ -151,7 +149,7 @@ const PostList = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:3001/posts/${postId}/comments`,
+        `https://mott-server-f5c8bc5b637d.herokuapp.com/posts/${postId}/comments`,
         {
           method: "POST",
           headers: {
@@ -170,8 +168,9 @@ const PostList = () => {
           ...prevState,
           [postId]: true,
         }));
+        setError("");
       } else {
-        setError(data.error);
+        setError(data.error || "An error occurred. Please try again later.");
       }
     } catch (error) {
       console.error("Error submitting comment:", error);
@@ -194,9 +193,10 @@ const PostList = () => {
 
   return (
     <div className="post-list-container">
-      {error && <div className="error">{error}</div>}
-      <div className="posts-wrapper">
-        {sortedPosts.map((post) => (
+    {error && <div className="error">{error}</div>}
+    <div className="posts-wrapper">
+      {sortedPosts.map((post) =>
+        post && post._id && post.author ? (
           <div key={post._id} className="post">
             {editingPost === post._id ? (
               <form onSubmit={handleUpdate} className="edit-form">
@@ -214,40 +214,38 @@ const PostList = () => {
                   className="edit-textarea"
                 ></textarea>
                 <button type="submit" className="edit-button">
-                  Karl yaqa
+                  Save
                 </button>
                 <button
                   type="button"
                   onClick={() => setEditingPost(null)}
                   className="edit-button cancel-button"
                 >
-                  Saciyta
+                  Cancel
                 </button>
               </form>
             ) : (
               <div>
                 <div className="post-header">
-                  <div className="author-info">
-                    <div className="author-details">
-                          <img
-                      src={`http://localhost:3001${post.author.avatar}`}
-                      alt='img'
+                  <figure className="avatar-wrapper">
+                    <img
+                      src={`https://mott-server-f5c8bc5b637d.herokuapp.com${post.author.avatar}`}
+                      alt="img"
                       className="user-post-avatar"
                     />
-                      <span className="author-name">
-                        <Link to={`/user-profile/${post.author._id}`}>
-                          {post.author.username}
-                        </Link>{" "}
-                      </span>
-                      <span className="post-time">
-                        {new Date(post.createdAt).toLocaleTimeString('fr-FR', { timeStyle: 'short' })}
-                      </span>
-                    </div>
+                  </figure>
+                  <div className="content">
+                    <h3>{post.author.username}</h3>
                   </div>
+                  <span className="updated">
+                      {new Date(post.createdAt).toLocaleTimeString("fr-FR", {
+                        timeStyle: "short",
+                      })}
+                    </span>
                   {user && (user._id === post.author._id || user.isAdmin) && (
                     <div className="post-controls">
                       <FontAwesomeIcon
-                        icon={faDeleteLeft}
+                        icon={faTrashAlt}
                         onClick={() => handleDelete(post._id)}
                         className="control-icon delete-icon"
                       />
@@ -262,23 +260,20 @@ const PostList = () => {
                 <p className="post-title">{truncateText(post.title, 20)}</p>
                 <p className="post-content">{truncateText(post.content, 20)}</p>
                 <div className="post-actions">
-                  <div className="left-actions">
-                    <button
-                      onClick={() => handleCommentToggle(post._id)}
-                      className="comment-button"
-                    >
-                      <FontAwesomeIcon icon={faComment} />{" "}
-                      {post.comments.length}
-                      <p>Comments</p>
-                    </button>
-                  </div>
-                  <div className="like-systeme-block">
+                  <button
+                    onClick={() => handleCommentToggle(post._id)}
+                    className="btn btn-comment"
+                  >
+                    <FontAwesomeIcon icon={faComment} className="icon" /> Comments{" "}
+                    {post.comments.length}
+                  </button>
+                  <div className="btn-container">
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
                         handleLike(post._id);
                       }}
-                      className="like-button"
+                      className="btn btn-like"
                     >
                       <FontAwesomeIcon icon={faThumbsUp} className="icon" />{" "}
                       {post.likes ? post.likes.length : 0}
@@ -288,48 +283,85 @@ const PostList = () => {
                         e.stopPropagation();
                         handleDislike(post._id);
                       }}
-                      className="dislike-button"
+                      className="btn btn-dislike"
                     >
                       <FontAwesomeIcon icon={faThumbsDown} className="icon" />{" "}
                       {post.dislikes ? post.dislikes.length : 0}
                     </button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        alert("Post shared!");
+                      }}
+                      className="btn btn-share"
+                    >
+                      <FontAwesomeIcon icon={faShare} className="icon" />
+                    </button>
                   </div>
                 </div>
                 {showComments[post._id] && (
-                  <div className="comments-section">
+                  <section className="post-comment-feed">
                     {post.comments.map((comment) => (
                       <div className="comment" key={comment._id}>
-                        <div className="comment-content">
-                          <div className="comment-author">
+                        <div className="avatar-wrapper">
+                          <img
+                            src={`https://mott-server-f5c8bc5b637d.herokuapp.com${comment.author.avatar}`}
+                            alt="img"
+                            className="avatar"
+                          />
+                          <span className="user">
                             <Link to={`/user-profile/${comment.author._id}`}>
                               {comment.author.username}
                             </Link>
-                          </div>
-                          <div className="comment-text">{comment.content}</div>
+                          </span>
+                        </div>
+                        <div className="content">
+                          <span className="text">{comment.content}</span>
                         </div>
                       </div>
                     ))}
                     {user && (
-                      <form
-                        onSubmit={(e) => handleCommentSubmit(e, post._id)}
-                      >
-                        <textarea
-                          placeholder="Add a comment"
-                          value={newComment}
-                          onChange={(e) => setNewComment(e.target.value)}
-                          required
-                        ></textarea>
-                        <button type="submit">Submit Comment</button>
-                      </form>
+                      <div className="add-comment">
+                        <figure className="avatar-wrapper">
+                          <img
+                            src={`https://mott-server-f5c8bc5b637d.herokuapp.com${user.avatar}`}
+                            alt="img"
+                            className="avatar"
+                          />
+                        </figure>
+                        <div className="textfield">
+                          <form
+                            onSubmit={(e) =>
+                              handleCommentSubmit(e, post._id)
+                            }
+                          >
+                            <input
+                              type="text"
+                              placeholder="Add a comment"
+                              value={newComment}
+                              onChange={(e) =>
+                                setNewComment(e.target.value)
+                              }
+                              required
+                            />
+                            <button className="btn btn-camera">
+                              <FontAwesomeIcon icon={faPaperPlane} />
+                            </button>
+                          </form>
+                        </div>
+                      </div>
                     )}
-                  </div>
+                  </section>
                 )}
               </div>
             )}
           </div>
-        ))}
-      </div>
+        ) : null
+      )}
     </div>
+  </div>
+  
+  
   );
 };
 

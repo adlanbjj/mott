@@ -37,7 +37,7 @@ function Dashboard() {
     });
 
     try {
-      const response = await fetch("http://localhost:3001/auth/current", {
+      const response = await fetch("https://mott-server-f5c8bc5b637d.herokuapp.com/auth/current", {
         method: "PATCH",
         credentials: "include",
         body: data,
@@ -69,7 +69,7 @@ function Dashboard() {
       {message && <p className="message">{message}</p>}
       <div className="form-group">
         {user && user.avatar && (
-          <img src={`http://localhost:3001${user.avatar}`} alt="User Avatar" className="user-avatar" />
+          <img src={`https://mott-server-f5c8bc5b637d.herokuapp.com${user.avatar}`} alt="User Avatar" className="user-avatar" />
         )}
         <label>Username: {user && user.username}</label>
       </div>

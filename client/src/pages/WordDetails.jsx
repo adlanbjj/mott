@@ -2,14 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faShareAlt,
   faEnvelope,
-  faEdit,
-  faTrash,
+
 } from "@fortawesome/free-solid-svg-icons";
 import { faWhatsapp, faTelegram } from "@fortawesome/free-brands-svg-icons";
 import { useUser } from "../context/userContext";
-import Cookies from 'js-cookie';
 import "../public/styles/Words.css";
 
 const WordDetails = () => {
@@ -17,14 +14,12 @@ const WordDetails = () => {
   const { user } = useUser();
   const [word, setWord] = useState(null);
   const [comments, setComments] = useState([]);
-  const [newComment, setNewComment] = useState("");
-  const [editingComment, setEditingComment] = useState(null);
-  const [commentContent, setCommentContent] = useState("");
+ 
 
   useEffect(() => {
     const fetchWord = async () => {
       try {
-        const response = await fetch(`http://localhost:3001/words/${wordId}`, {
+        const response = await fetch(`https://mott-server-f5c8bc5b637d.herokuapp.com/words/${wordId}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -40,7 +35,7 @@ const WordDetails = () => {
     const fetchComments = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3001/comments/${wordId}`,
+          `https://mott-server-f5c8bc5b637d.herokuapp.com/comments/${wordId}`,
           {
             method: "GET",
             headers: {

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
-  faKeyboard,
   faUsers,
   faCaretLeft,
   faGear,
@@ -10,6 +9,7 @@ import {
   faEnvelope,
   faPlusCircle,
   faSignOut,
+  faLanguage,
 } from "@fortawesome/free-solid-svg-icons";
 import { useUser } from "../../context/userContext";
 import { Link, NavLink } from "react-router-dom";
@@ -37,7 +37,7 @@ const Sidebar = () => {
       <div className="sidebar-head">
         <div className="user-img">
           <img
-            src={user?.avatar ? `http://localhost:3001${user.avatar}` : userAva}
+            src={user?.avatar ? `https://mott-server-f5c8bc5b637d.herokuapp.com${user.avatar}` : userAva}
             alt="User Avatar"
           />
         </div>
@@ -71,7 +71,7 @@ const Sidebar = () => {
             </li>
             <li>
               <NavLink to="/keyboard">
-                <FontAwesomeIcon icon={faKeyboard} className="icon" />
+                <FontAwesomeIcon icon={faLanguage} className="icon" />
                 <span className="text">Klaviatur</span>
               </NavLink>
             </li>
@@ -133,6 +133,11 @@ const Sidebar = () => {
               <NavLink to="/faq">
                 <FontAwesomeIcon icon={faInfo} className="icon" />
                 <span className="text">FAQ</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/faq">
+                <span className="text">Privacy Policy</span>
               </NavLink>
             </li>
           </ul>

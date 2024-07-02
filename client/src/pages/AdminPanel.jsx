@@ -8,7 +8,7 @@ const AdminPanel = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch('http://localhost:3001/auth/admin/users', {
+        const response = await fetch('https://mott-server-f5c8bc5b637d.herokuapp.com/auth/admin/users', {
           credentials: 'include',
         });
         const data = await response.json();
@@ -27,7 +27,7 @@ const AdminPanel = () => {
 
   const handleDelete = async (userId) => {
     try {
-      const response = await fetch(`http://localhost:3001/auth/admin/users/${userId}`, {
+      const response = await fetch(`https://mott-server-f5c8bc5b637d.herokuapp.com/auth/admin/users/${userId}`, {
         method: 'DELETE',
         credentials: 'include',
       });
@@ -46,7 +46,7 @@ const AdminPanel = () => {
 
   const handleBlock = async (userId) => {
     try {
-      const response = await fetch(`http://localhost:3001/auth/admin/users/block/${userId}`, {
+      const response = await fetch(`https://mott-server-f5c8bc5b637d.herokuapp.com/auth/admin/users/block/${userId}`, {
         method: 'PATCH',
         credentials: 'include',
       });

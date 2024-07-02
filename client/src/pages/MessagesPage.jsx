@@ -15,7 +15,7 @@ function MessagesPage({ onClose }) {
   const fetchConversations = async () => {
     try {
       const response = await fetch(
-        "http://localhost:3001/messages/conversations",
+        "https://mott-server-f5c8bc5b637d.herokuapp.com/messages/conversations",
         {
           method: "GET",
           credentials: "include",
@@ -35,7 +35,7 @@ function MessagesPage({ onClose }) {
   const fetchConversation = async (recipientId) => {
     try {
       const response = await fetch(
-        `http://localhost:3001/messages/conversation/${recipientId}`,
+        `https://mott-server-f5c8bc5b637d.herokuapp.com/messages/conversation/${recipientId}`,
         {
           method: "GET",
           credentials: "include",
@@ -56,7 +56,7 @@ function MessagesPage({ onClose }) {
   const sendMessage = async () => {
     if (!content || !selectedChat) return;
     try {
-      const response = await fetch("http://localhost:3001/messages/send", {
+      const response = await fetch("https://mott-server-f5c8bc5b637d.herokuapp.com/messages/send", {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
@@ -90,7 +90,7 @@ function MessagesPage({ onClose }) {
         <div className="left-message-block">
           <div className="top">
             <input type="text" placeholder="Search" />
-            <a href="javascript:;" className="search"></a>
+            <button className="search" aria-label="Search"></button>
           </div>
           <div className="people">
             {conversations.map((conv, index) => (
@@ -104,7 +104,7 @@ function MessagesPage({ onClose }) {
               >
                 <img
                   src={
-                    `http://localhost:3001${conv.avatar}` ||
+                    `https://mott-server-f5c8bc5b637d.herokuapp.com${conv.avatar}` ||
                     "default-avatar.png"
                   }
                   alt="avatar"
@@ -140,7 +140,7 @@ function MessagesPage({ onClose }) {
                   ))}
                 </div>
                 <div className="write">
-                  <a href="javascript:;" className="write-link attach"></a>
+                  <button className="write-link attach" aria-label="Attach file"></button>
                   <input
                     type="text"
                     value={content}
@@ -148,12 +148,12 @@ function MessagesPage({ onClose }) {
                     onKeyDown={handleKeyDown}
                     placeholder="Type a message..."
                   />
-                  <a href="javascript:;" className="write-link smiley"></a>
-                  <a
-                    href="javascript:;"
+                  <button className="write-link smiley" aria-label="Insert smiley"></button>
+                  <button
                     className="write-link send"
                     onClick={sendMessage}
-                  ></a>
+                    aria-label="Send message"
+                  ></button>
                 </div>
               </>
             ) : (

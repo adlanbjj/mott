@@ -9,7 +9,7 @@ const CreatePost = ({ onPostCreated }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:3001/posts/create', {
+      const response = await fetch('https://mott-server-f5c8bc5b637d.herokuapp.com/posts/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

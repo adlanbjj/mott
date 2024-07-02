@@ -11,7 +11,7 @@ const useAuth = () => {
 
   const logout = async () => {
     try {
-      await fetch("http://localhost:3001/auth/logout", {
+      await fetch("https://mott-server-f5c8bc5b637d.herokuapp.com/auth/logout", {
         method: "POST",
         credentials: 'include',
       });

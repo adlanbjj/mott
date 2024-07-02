@@ -20,7 +20,7 @@ function ProfilePage() {
         console.log("UserID:", userId);
         try {
           const response = await fetch(
-            `http://localhost:3001/auth/user/${userId}`,
+            `https://mott-server-f5c8bc5b637d.herokuapp.com/auth/user/${userId}`,
             {
               credentials: "include",
             }
@@ -49,7 +49,7 @@ function ProfilePage() {
       return;
     }
     try {
-      const response = await fetch("http://localhost:3001/messages/send", {
+      const response = await fetch("https://mott-server-f5c8bc5b637d.herokuapp.com/messages/send", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -85,7 +85,7 @@ function ProfilePage() {
       <div className="profile-card">
         <div className="left-card">
           <img
-            src={`http://localhost:3001${profileUser.avatar}`}
+            src={`https://mott-server-f5c8bc5b637d.herokuapp.com${profileUser.avatar}`}
             alt={`${profileUser.username}'s avatar`}
             className="profile-avatar"
           />

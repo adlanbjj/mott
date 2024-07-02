@@ -10,7 +10,7 @@ const ForgotPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:3001/auth/forgot-password", {
+      const response = await fetch("https://mott-server-f5c8bc5b637d.herokuapp.com/auth/forgot-password", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

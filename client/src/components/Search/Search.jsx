@@ -10,7 +10,7 @@ const Search = () => {
   useEffect(() => {
     const fetchWords = async () => {
       try {
-        const response = await fetch(`http://localhost:3001/words/all`, {
+        const response = await fetch(`https://mott-server-f5c8bc5b637d.herokuapp.com/words/all`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
