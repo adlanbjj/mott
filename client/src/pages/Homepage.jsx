@@ -11,7 +11,7 @@ const Homepage = () => {
     <div className='homepage-container'>
       {!user && (
         <div className='auth-message'>
-          <p>Post yazya ya postan buxaẋ komentari yita <Link to='/auth' className='auth-link'>Çuvala</Link></p>
+          <p>To write a post or comment, log in to your account <Link to='/auth' className='auth-link'>Sign in</Link></p>
         </div>
       )}
       <PostList />

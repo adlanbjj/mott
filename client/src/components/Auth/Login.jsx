@@ -72,7 +72,7 @@ const Login = () => {
       <form onSubmit={handleSubmit} className="login-form">
         <input
           type="text"
-          placeholder="Yazye daq̇aşxoçun ċe"
+          placeholder="Username"
           name="username"
           value={form.username}
           onChange={handleChange}
@@ -81,17 +81,17 @@ const Login = () => {
         {errors.username && <p className="error-message">{errors.username}</p>}
         <input
           type="password"
-          placeholder="Yazye ẋay parol"
+          placeholder="Password"
           name="password"
           value={form.password}
           onChange={handleChange}
           className={errors.password ? "input-error" : ""}
         />
         {errors.password && <p className="error-message">{errors.password}</p>}
-        <button type="submit">Çuġo</button>
+        <button type="submit">Login</button>
         {error && <p className="error-message server-error">{error}</p>}
         <div className="forgot-password-link">
-          <Link to="/forgot-password">Parol yicyella?</Link>
+          <Link to="/forgot-password">Forgot password?</Link>
         </div>
       </form>
     </div>

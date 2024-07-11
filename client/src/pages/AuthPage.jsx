@@ -15,13 +15,13 @@ const AuthPage = () => {
               className={`tab ${activeTab === 'login' ? 'active' : ''}`}
               onClick={() => setActiveTab('login')}
             >
-              Çuġo
+              Login
             </div>
             <div
               className={`tab ${activeTab === 'register' ? 'active' : ''}`}
               onClick={() => setActiveTab('register')}
             >
-              Qolla akkaunt
+              Register
             </div>
           </div>
           {activeTab === 'login' ? <Login /> : <Register />}

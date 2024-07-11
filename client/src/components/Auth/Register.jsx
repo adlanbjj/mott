@@ -89,7 +89,7 @@ const Register = () => {
       <form onSubmit={handleSubmit} className="register-form">
         <input
           type="text"
-          placeholder="Yazye daq̇aşxoçun ċe"
+          placeholder="Username"
           name="username"
           value={form.username}
           onChange={handleChange}
@@ -98,7 +98,7 @@ const Register = () => {
         {errors.username && <p className="error-message">{errors.username}</p>}
         <input
           type="email"
-          placeholder="Djayazde ẋayn elektronan poştan adres"
+          placeholder="Email"
           name="email"
           value={form.email}
           onChange={handleChange}
@@ -107,7 +107,7 @@ const Register = () => {
         {errors.email && <p className="error-message">{errors.email}</p>}
         <input
           type="password"
-          placeholder="Yazye parol"
+          placeholder="Password"
           name="password"
           value={form.password}
           onChange={handleChange}
@@ -116,7 +116,7 @@ const Register = () => {
         {errors.password && <p className="error-message">{errors.password}</p>}
         <input
           type="text"
-          placeholder="Ẋo jaş v(y)ol metig?"
+          placeholder="Location"
           name="location"
           value={form.location}
           onChange={handleChange}
@@ -125,14 +125,14 @@ const Register = () => {
         {errors.location && <p className="error-message">{errors.location}</p>}
         <input
           type="number"
-          placeholder="Mas şo du ẋan?"
+          placeholder="Age"
           name="age"
           value={form.age}
           onChange={handleChange}
           className={errors.age ? "input-error" : ""}
         />
         {errors.age && <p className="error-message">{errors.age}</p>}
-        <button type="submit">Qolla</button>
+        <button type="submit">Register</button>
         {serverError && <p className="error-message server-error">{serverError}</p>}
       </form>
     </div>

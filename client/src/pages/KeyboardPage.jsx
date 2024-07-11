@@ -120,11 +120,11 @@ const TranslitPage = () => {
           onChange={handleInputChange}
           className="translit-input"
           rows="3"
-          placeholder="Kirillican mattaẋ tekst yazye"
+          placeholder="Cyrillic"
         />
         {inputValue && (
           <button onClick={clearInput} className="clear-button">
-            Ċanye
+            Clear
           </button>
         )}
       </div>
@@ -134,11 +134,11 @@ const TranslitPage = () => {
           readOnly
           className="translit-input"
           rows="3"
-          placeholder="Transliteraci yina tekst quzaẋ hir yu"
+          placeholder="Latin"
         />
       </div>
       <button onClick={() => alert(translitValue)} className="share-button">
-        Gayta
+        Show
       </button>
     </div>
   );

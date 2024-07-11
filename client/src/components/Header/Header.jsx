@@ -24,7 +24,7 @@ const Header = () => {
       </div>
       <div className="header-user-block">
        
-        <div className="language-selector">
+        {/* <div className="language-selector">
           <button>
             {language} <img src={flag} alt="flag" />
           </button>
@@ -36,7 +36,7 @@ const Header = () => {
               English <img src={englishFlag} alt="English flag" />
             </a>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
